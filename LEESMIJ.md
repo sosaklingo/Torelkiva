@@ -1,87 +1,81 @@
-# TORELKIVA 1.1 — taal + echte berichtversleuteling
+# Torelkiva 1.2 — installatie en gebruik
 
-Deze map bevat:
+## Wat heb je nodig?
 
-- `WOORDENBOEK.md` – originele woorden, grammatica en voorbeelden.
-- `torelkiva.py` – versleutelen / ontsleutelen van berichten en bestanden.
-- `schrift.py` – letters tekenen in een eigen visueel Torel-schrift (SVG).
-- `TOREL_ALFABET.svg` – overzicht van het nieuwe schrift.
-- `VOORBEELD_TOREL.svg` – voorbeeldzin in dat schrift.
-- `START_WINDOWS.bat` en `START_LINUX.sh` – eenvoudig startmenu.
+- Windows 10/11 of een recente Linux-versie.
+- Python **3.9 of nieuwer**. Op Windows: [python.org](https://www.python.org/downloads/) of je eigen pakketbeheerder.
+- De Python-bibliotheek `cryptography` voor encryptie.
 
-## Installatie
+Download de projectbestanden via GitHub (**Code → Download ZIP**) en pak ze uit. Open een terminal in deze map.
 
-Python 3.9+ nodig. Voor de **versleuteling** is één extra Python-bibliotheek nodig:
+Installeer de bibliotheek:
 
 ```bash
-python -m pip install cryptography
+python -m pip install -r requirements.txt
 ```
 
-Op Linux gebruik je eventueel `python3` en `python3 -m pip`.
+Op sommige Windows-computers gebruik je `py -3` in plaats van `python`; op Linux `python3`.
 
-## Gebruik (Windows en Linux)
+## Onze taal leren
 
-Dubbelklik op `START_WINDOWS.bat` op Windows of start `bash START_LINUX.sh`
-op Linux. Of werk direct in een terminal:
+```bash
+python taal.py lijst
+python taal.py zoek begrijpen
+python taal.py woord nela
+python taal.py voorbeelden
+python taal.py oefen
+```
+
+De zoekfunctie zoekt woorden, maar **vertaalt niet automatisch hele Nederlandse zinnen**. Gebruik de [grammatica](GRAMMATICA.md) en het [oefenboek](OEFENBOEK.md).
+
+## Een bericht versleutelen
 
 ```bash
 python torelkiva.py versleutel
+```
+
+Voer één regel tekst in, kies een lange geheime wachtzin en herhaal de wachtzin. Kopieer de `TK1:`-code voor de ontvanger. De ontvanger heeft dezelfde geheime wachtzin nodig.
+
+Om te ontsleutelen:
+
+```bash
 python torelkiva.py ontsleutel
 ```
 
-De tool vraagt daarna de tekst en je geheime wachtzin. De tool **slaat die
-wachtzin nergens op**. Om hetzelfde bericht te lezen moet de ontvanger
-precies dezelfde wachtzin kennen.
+Plak de complete `TK1:`-code en geef dezelfde wachtzin op.
 
-### Bestanden versleutelen
+### Tekst met meerdere regels
+
+Je kunt meerregelige tekst of codes via standaardinvoer aanleveren:
+
+```bash
+python torelkiva.py versleutel --stdin < brief.txt
+python torelkiva.py ontsleutel --stdin < code.txt
+```
+
+Let op: de wachtzin wordt **niet** als commandoregelargument ingevoerd, maar wordt interactief gevraagd. Voor interactieve prompts is een terminal nodig; bij automatische scripts kan `getpass` daarom ontbreken.
+
+### Kleine bestanden
 
 ```bash
 python torelkiva.py versleutel --bestand bericht.txt
 python torelkiva.py ontsleutel --bestand bericht.txt.tkv
 ```
 
-De versleutelde file heet `bericht.txt.tkv`. Bij ontsleuteling ontstaat
-`bericht.txt.ontsleuteld`. De originele file wordt nooit automatisch verwijderd.
-De bestandsmodus is bedoeld voor kleine bestanden (maximaal 50 MiB).
+Dat maakt `bericht.txt.tkv` en later `bericht.txt.ontsleuteld`. Bestanden zijn maximaal 50 MiB; bestaande bestanden worden nooit automatisch overschreven en oorspronkelijke bestanden blijven bestaan. Deel geen geheimen op GitHub.
 
-### Nieuw eigen schrift tekenen
+## Schrift maken
 
 ```bash
-python schrift.py "Mi Torelkivaem vara"
+python schrift.py "Mi Torelkivaem vara."
 ```
 
-Er ontstaat `TOREL_BERICHT.svg`. De omvormer gebruikt zelf ontworpen vormen;
-niet ieder teken is leesbaar zonder het alfabet. Toch is dit **slechts een
-schrift**, géén veilige versleuteling.
+Daarna bestaat `TOREL_BERICHT.svg`. Dit bestand kun je openen in een webbrowser. Het schrift is een visuele lettercode en **geen encryptie**.
 
-## Hoe veilig is de versleuteling?
+## Testen
 
-De code gebruikt **AES-256-GCM** voor versleuteling én bescherming tegen
-gewijzigde berichten, en **scrypt** om uit een wachtzin een sleutel af te leiden.
-Elk bericht krijgt een verse willekeurige salt (16 bytes) en nonce (12 bytes).
-Formaat `TK1:` gevolgd door URL-safe base64 van versie + salt + nonce + ciphertext.
-De GCM-tag en een vaste context worden mee geauthenticeerd.
+```bash
+python -m unittest discover -s tests -v
+```
 
-Dit is een toepassing van bestaande, publiek beoordeelde cryptografie – er
-wordt **geen eigen cryptografisch algoritme** bedacht. Er is geen garantie
-dat het totaal als programma onafhankelijk geaudit is.
-
-**Belangrijk:**
-
-- Gebruik een **lange, unieke wachtzin** (bij voorkeur 5–6 willekeurige woorden).
-- Deel de wachtzin **niet via hetzelfde kanaal** als het versleutelde bericht.
-- Vergeet je wachtzin? Dan kan deze tool de tekst niet herstellen.
-- De taal en het schrift zijn voor geheimhouding door obscuriteit, de
-  versleuteling is de echte technische beveiliging.
-- Op een geïnfecteerd apparaat kan de tekst vóór of na versleuteling uitlekken.
-- Tekst uit een chat kan elders opgeslagen blijven. En het originele
-  tekstbestand blijft bestaan tot je het zelf veilig opruimt.
-- Er is geen automatische sleuteluitwisseling, perfect forward secrecy
-  of afzenderverificatie. Gebruik voor bijzonder gevoelige communicatie een
-  gerenommeerde end-to-end versleutelde berichtenapp.
-
-## Ontwikkeling
-
-Torelkiva is een experimentele kunsttaal (versie 1.1). Uniciteit is niet
-wereldwijd te garanderen. De naam werd op 12 november 2026 als exacte
-zoekterm bekeken zonder duidelijke match.
+De basisversie `TK1:` uit versie 1.1 blijft leesbaar in deze versie. Bewaar je wachtzin veilig. Zie [VEILIGHEID.md](VEILIGHEID.md) voor beperkingen.
