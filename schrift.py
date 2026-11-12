@@ -62,7 +62,7 @@ def sentence_svg(sentence: str) -> str:
             items.append(draw_glyph(ch, x, y))
             x += 31
         else:
-            items.append(f'<text x="{x+8}" y="{y+32}" font-size="25" fill="#172638">{html.escape(ch)}</text>')
+            items.append(f'<text x="{x+8}" y="{y+32}" font-size="25" fill="#172638">{html.escape(ch if ch.isprintable() else "?")}</text>')
             x += 18
     maxx = max(maxx, x)
     h = y + 100
