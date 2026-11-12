@@ -26,3 +26,11 @@ Torelkiva bestaat uit drie aparte onderdelen:
 ## Rapporteren
 
 Vermeld bij meldingen over fouten de betrokken softwareversie en een minimale reproductie zonder echte wachtzinnen of gevoelige inhoud.
+
+## Extra aandachtspunten bij versie 1.2
+
+- De tool weigert invoer groter dan 50 MiB, en laat bestaande uitvoerbestanden ongemoeid.
+- `--stdin` accepteert meerregelige tekst, maar er is nog steeds een interactieve terminal nodig om de geheime wachtzin in te voeren.
+- Een `TK1:`-code bevat versie-informatie en gecodeerde gegevens, **niet** de geheime wachtzin. Deel codes alleen met mensen die je vertrouwt.
+- Er is geen onafhankelijke cryptografische audit of onafhankelijke penetratietest uitgevoerd. Alle lokale tests samen vormen **geen** beveiligingscertificering.
+- Doe zelf een back-up van je versleutelde informatie én bewaar de wachtzin veilig voordat je het onversleutelde origineel verwijdert.
