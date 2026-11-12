@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+*.tkv
+*.ontsleuteld
+TOREL_BERICHT.svg
+private/
+secrets/
+*.zip
+.DS_Store
