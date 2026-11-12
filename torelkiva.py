@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Torelkiva 1.1: berichten en (kleine) bestanden versleutelen.
+"""Torelkiva 1.2: berichten en (kleine) bestanden versleutelen.
 
 Beveiliging: scrypt (N=2^15, r=8, p=1) + AES-256-GCM met een verse
 willekeurige salt en nonce per bericht. Vereist: cryptography.
@@ -29,6 +29,8 @@ NONCE_LEN = 12
 HEADER_LEN = len(MAGIC) + SALT_LEN + NONCE_LEN
 AAD = b"Torelkiva-Encrypted-Message-v1"
 MAX_FILE_SIZE = 50 * 1024 * 1024  # kleine bestanden; houdt geheugengebruik beheersbaar
+MAX_ENCRYPTED_SIZE = MAX_FILE_SIZE + HEADER_LEN + 16
+MAX_TOKEN_SIZE = len(PREFIX) + ((MAX_ENCRYPTED_SIZE + 2) // 3) * 4
 
 
 def _key(passphrase: str, salt: bytes) -> bytes:
@@ -37,6 +39,8 @@ def _key(passphrase: str, salt: bytes) -> bytes:
 
 
 def encrypt_bytes(data: bytes, passphrase: str) -> bytes:
+    if len(data) > MAX_FILE_SIZE:
+        raise ValueError("Invoer te groot (maximaal 50 MiB).")
     if len(passphrase) < 12:
         raise ValueError("Gebruik een wachtzin van minimaal 12 tekens (liefst vijf willekeurige woorden).")
     salt = os.urandom(SALT_LEN)
@@ -46,6 +50,8 @@ def encrypt_bytes(data: bytes, passphrase: str) -> bytes:
 
 
 def decrypt_bytes(blob: bytes, passphrase: str) -> bytes:
+    if len(blob) > MAX_ENCRYPTED_SIZE:
+        raise ValueError("Versleutelde invoer te groot (maximaal 50 MiB).")
     if not blob.startswith(MAGIC) or len(blob) < HEADER_LEN + 16:
         raise ValueError("Ongeldig Torelkiva-bericht of onvolledige code.")
     offset = len(MAGIC)
@@ -65,6 +71,8 @@ def encrypt_text(text: str, passphrase: str) -> str:
 
 def decrypt_text(token: str, passphrase: str) -> str:
     token = token.strip()
+    if len(token) > MAX_TOKEN_SIZE:
+        raise ValueError("Versleutelde tekst te groot (maximaal 50 MiB).")
     if not token.startswith(PREFIX):
         raise ValueError("De code moet beginnen met TK1:.")
     encoded = token[len(PREFIX):]
@@ -79,7 +87,10 @@ def decrypt_text(token: str, passphrase: str) -> str:
 
 def _save_new(path: Path, data: bytes) -> None:
     # Maakt een nieuw bestand aan, overschrijft niets, beperkt toegangsrechten waar ondersteund.
-    fd = os.open(str(path), os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL
+    if hasattr(os, "O_NOFOLLOW"):
+        flags |= os.O_NOFOLLOW
+    fd = os.open(str(path), flags, 0o600)
     try:
         with os.fdopen(fd, "wb") as file:
             file.write(data)
@@ -92,10 +103,14 @@ def _save_new(path: Path, data: bytes) -> None:
 
 
 def run() -> int:
-    parser = argparse.ArgumentParser(description="Torelkiva 1.1 – versleutel en ontsleutel berichten of bestanden")
+    parser = argparse.ArgumentParser(description="Torelkiva 1.2 – versleutel en ontsleutel berichten of bestanden")
+    parser.add_argument("--versie", action="version", version="Torelkiva 1.2 (bestandsformaat TK1)")
     parser.add_argument("actie", choices=["versleutel", "ontsleutel"], help="Kies je actie")
     parser.add_argument("--bestand", type=Path, help="Optioneel: werk met een tekstbestand of ander klein bestand")
+    parser.add_argument("--stdin", action="store_true", help="Lees tekst/een TK1-code van standaardinvoer (ondersteunt meerdere regels)")
     args = parser.parse_args()
+    if args.bestand and args.stdin:
+        parser.error("Kies --bestand OF --stdin, niet allebei.")
 
     try:
         if args.actie == "versleutel":
@@ -105,6 +120,8 @@ def run() -> int:
                 if args.bestand.stat().st_size > MAX_FILE_SIZE:
                     raise ValueError("Bestand te groot (maximaal 50 MiB).")
                 data = args.bestand.read_bytes()
+            elif args.stdin:
+                data = sys.stdin.buffer.read(MAX_FILE_SIZE + 1)
             else:
                 data = input("Tekst die je wilt versleutelen: ").encode("utf-8")
             password = getpass("Kies een lange geheime wachtzin: ")
@@ -126,6 +143,8 @@ def run() -> int:
                 if args.bestand.stat().st_size > MAX_FILE_SIZE + 128:
                     raise ValueError("Bestand te groot (maximaal 50 MiB).")
                 blob = args.bestand.read_bytes()
+            elif args.stdin:
+                token = sys.stdin.read(MAX_TOKEN_SIZE + 1)
             else:
                 token = input("Plak hier je versleutelde TK1-code: ")
             password = getpass("Geheime wachtzin: ")
