@@ -1,18 +1,20 @@
-# Torelkiva publiceren op GitHub
+# Torelkiva op GitHub — publicatie en onderhoud
 
-De repository **https://github.com/sosaklingo/Torelkiva** is al aangemaakt als **Public**.
+Torelkiva staat openbaar op **https://github.com/sosaklingo/Torelkiva**.
 
-## Als ChatGPT geen schrijfrechten heeft
+## Herkomst
 
-1. Log in op GitHub als `sosaklingo`.
-2. Open https://github.com/sosaklingo/Torelkiva .
-3. Kies **uploading an existing file** (als de repository leeg is) of **Add file → Upload files**.
-4. Pak dit ZIP-bestand uit op je computer of telefoon.
-5. Upload **alle bestanden**, inclusief `README.md`, `WOORDENBOEK.md`, de scripts, de SVG's en `ONTWIKKELINGSVERKLARING.pdf`, en het mapje `tests`.
-6. Kies **Commit changes** en controleer dat de bestanden zichtbaar zijn.
+Initiatiefnemer: **Marco Beenen**. Ontwikkeld in samenwerking met **ChatGPT (OpenAI)** sinds **12 november 2026**. Deze vermelding staat ook in `README.md`, `HERKOMST.md` en `CITATION.cff`.
 
-GitHub is een openbare projectpublicatie, geen merkregistratie. Publiek zijn betekent dat ook het woordenboek en de code zichtbaar zijn. **Publiceer geen geheime wachtzinnen of persoonlijke versleutelde privéberichten.**
+## Een nieuwe versie publiceren
 
-## Verbinding met GitHub
+1. Bewaar eerst een kopie van de huidige code en documentatie.
+2. Wijzig de bestanden en verhoog het projectversienummer in `PROJECT.json`, `CITATION.cff` en `CHANGELOG.md`.
+3. Controleer of woordenschat en grammatica elkaar niet tegenspreken.
+4. Draai lokaal `python -m unittest discover -s tests -v`.
+5. Commit en publiceer de wijzigingen met GitHub. De workflow `.github/workflows/tests.yml` voert ook online tests uit.
+6. Vernieuw `SHA256SUMS.txt` na het wijzigen van bestanden, omdat oude controlesommen anders niet meer kloppen. Dit bestand bevat geen hash van zichzelf.
 
-Wanneer een ChatGPT-koppeling het uploaden weigert met `Resource not accessible by integration`, geef de GitHub-app expliciet schrijftoegang tot de repository (bij GitHub **Settings → Applications** of **Settings → Integrations → Applications** en de betreffende app), of gebruik de handmatige upload hierboven. De menu's kunnen veranderen.
+## Privacy en rechten
+
+Zet **nooit** wachtwoorden, geheime sleutels, privégesprekken of persoonlijke informatie in een openbare GitHub-repository. De taal en de code zijn openbaar. GitHub-publicatie is **geen** officiële merkregistratie, en de software is niet onafhankelijk beveiligingsgeaudit.
