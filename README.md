@@ -1,89 +1,97 @@
-# TORELKIVA — geheime kunsttaal + eigen schrift + versleuteling
+# TORELKIVA 2.0 — kunsttaal, schrift en versleuteling
 
-> **Ontwikkeld door Marco Beenen in samenwerking met ChatGPT (OpenAI)**  
-> **Initiatiefnemer:** Marco Beenen  
-> **Startdatum:** 12 november 2026  
-> **Versie:** 1.2
+> **Torelkiva — ontwikkeld op initiatief van Marco Beenen in samenwerking met ChatGPT (OpenAI), begonnen op 12 november 2026.**  
+> Versie **2.0** — openbare projecteditie; volledig lokaal bruikbaar op Windows en Linux.  
+> **Geen officiële OpenAI-goedkeuring, merkregistratie of onafhankelijke beveiligingsaudit.**
 
-**Torelkiva** is een creatieve, zelfontwikkelde kunsttaal met een groeiend woordenboek, eigen grammatica en het visuele Torel-schrift. Het project bevat daarnaast een **aparte Python-tool voor encryptie**. Taal en schrift alleen zijn niet veilig als cryptografische geheimhouding.
+**Torelkiva** is een fictieve, ontworpen kunsttaal met een originele woordenlijst, vaste basisgrammatica en een grafisch letterschrift. De optionele encryptietool is een apart programma: een geheim alfabet is geen cryptografie.
 
-**English:** *Torelkiva is a constructed secret language initiated by Marco Beenen and developed in collaboration with ChatGPT (OpenAI), starting on 12 November 2026. It includes a vocabulary, grammar, original visual alphabet, and separate message encryption software.*
+**English:** *Torelkiva is a constructed language initiated by Marco Beenen and developed with the assistance of ChatGPT (OpenAI), starting 12 November 2026. It has its own vocabulary, grammar, visual writing system and a separate local encryption tool.*
 
-## Officiële projectvermelding
+## Dit zit in versie 2.0
 
-> **Torelkiva — ontwikkeld door Marco Beenen in samenwerking met ChatGPT (OpenAI), begonnen op 12 november 2026.**
+- **370 unieke woorden** in `WOORDENLIJST.tsv`; 149 oorspronkelijke woorden zijn behouden.
+- Een gedocumenteerde **basisgrammatica**, controle van vervoegingen en een systematische uitspraakgids.
+- **Gecontroleerde vertaler** `vertaler.py`: Nederlands ↔ Torelkiva voor eenvoudige, ondersteunde zinsvormen. Geen vertaler voor willekeurige Nederlandse tekst; onbekende zinnen leveren een duidelijke foutmelding.
+- **Desktopprogramma met knoppen** `app.py`: vertalen, zoeken, Torel-schrift als SVG, en TK1-berichten versleutelen/ontsleutelen.
+- **Eigen letterschrift** voor a–z, inclusief voorbeeld, letteroverzicht en SVG-generator `schrift.py`.
+- **Offline miniwoordenboek** `offline.html`, lokaal in een browser te openen. Geen mobiele encryptie in deze pagina.
+- **Echte optionele encryptie** `torelkiva.py` (AES-256-GCM + scrypt); bestaande TK1-berichten uit 1.1/1.2 blijven compatibel met dezelfde wachtzin.
+- Documentatie, oefenboek, technische tests en controlehashes.
 
-Dit is een vermelding van de menselijke initiatiefnemer en het gebruik van AI als ontwikkelhulp. **OpenAI heeft het project niet officieel erkend of gecertificeerd.** GitHub-publicatie is geen merkregistratie of onafhankelijk bewijs van auteursrechten. [Lees de herkomstverklaring](HERKOMST.md).
+## Snel beginnen
 
-## Wat kan versie 1.2?
-
-- **149 basiswoorden**: raadpleeg het [woordenboek](WOORDENBOEK.md) en de bronlijst [WOORDENLIJST.tsv](WOORDENLIJST.tsv).
-- **Consistente basisgrammatica**: lees [GRAMMATICA.md](GRAMMATICA.md).
-- **Leren en oefenen**: gebruik [OEFENBOEK.md](OEFENBOEK.md) of `taal.py`.
-- **Visueel schrift**: [Torel-alfabet](TOREL_ALFABET.svg), [voorbeeld](VOORBEELD_TOREL.svg), SVG-generator `schrift.py`.
-- **Versleutelen**: `torelkiva.py` (AES-256-GCM met scrypt), compatibel met eerder gemaakte `TK1:`-berichten.
-- **Windows en Linux**: eenvoudige startscripts en een terminalhandleiding.
-- **Tests**: `python -m unittest discover -s tests -v`.
-
-## Snelle voorbeelden
-
-| Nederlands | Torelkiva |
-|---|---|
-| Hallo! | `Vema!` |
-| Ik begrijp jou niet. | `Mi tiem vo nela.` |
-| Wij spreken de geheime taal. | `Miva sima ravoem vara.` |
-| Wij zullen een nieuw woord schrijven. | `Miva nori mevaem sa mero.` |
-
-De taal is nog in ontwikkeling. De woordenboektool is **geen automatische vertaler voor complete zinnen**.
-
-## Aan de slag
-
-Installeer **Python 3.9+**. Voor de encryptietool:
+Installeer Python 3.9+ en, voor versleuteling:
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-Woorden zoeken en oefenen:
+**Desktopprogramma (Windows / Linux met Tkinter):**
+
+```bash
+python app.py
+```
+
+Op Windows kun je `START_WINDOWS.bat` openen. Op Linux: `bash START_LINUX.sh`.
+
+**Vertaler (gecontroleerde zinnen):**
+
+```bash
+python vertaler.py --van nl "Ik begrijp jou niet."
+python vertaler.py --van tk "Mi tiem vo nela."
+```
+
+**Woordenboek:**
 
 ```bash
 python taal.py zoek geheim
-python taal.py woord sima
-python taal.py voorbeelden
 python taal.py oefen
 ```
 
-Versleutelen of ontsleutelen:
+**Versleutelen:**
 
 ```bash
 python torelkiva.py versleutel
 python torelkiva.py ontsleutel
 ```
 
-Schrift tekenen:
+**Tests:**
 
 ```bash
-python schrift.py "Mi Torelkivaem vara."
+python -m unittest discover -s tests -v
 ```
 
-Op Windows kun je ook `START_WINDOWS.bat` gebruiken; op Linux `bash START_LINUX.sh`. Zie [LEESMIJ.md](LEESMIJ.md) voor volledige instructies.
+## De taal: enkele voorbeelden
 
-## Veiligheid
+| Nederlands | Torelkiva |
+|---|---|
+| Hallo! | `Vema!` |
+| Ik begrijp jou niet. | `Mi tiem vo nela.` |
+| Wij spreken de geheime taal. | `Miva sima ravoem vara.` |
+| Wij schrijven een nieuw woord. | `Miva nori mevaem mero.` |
+| Begrijp jij mij? | `Ti miem nela ke?` |
 
-Voor het versleutelen wordt bewezen cryptografie gebruikt, maar deze toepassing is **niet onafhankelijk geaudit**. Gebruik een lange, willekeurige, geheime wachtzin en deel die niet via hetzelfde kanaal. Verlies je de wachtzin, dan is de inhoud doorgaans niet te herstellen. Het oorspronkelijke bestand wordt na versleutelen **niet verwijderd**. Zie [VEILIGHEID.md](VEILIGHEID.md).
+Kernregel: **onderwerp → voorwerp → tijd → ontkenning → werkwoord**. `-em` markeert het voorwerp, `-in` het meervoud, `na` het verleden en `sa` de toekomst. Zie [GRAMMATICA.md](GRAMMATICA.md).
+
+## Belangrijke grenzen
+
+- Een woordenboek van 370 woorden is **geen volledige menselijke spreektaal**. De zinsvertaler ondersteunt een veel kleinere, expliciet vastgelegde deelverzameling; hij gebruikt niet elk woord uit de lijst automatisch.
+- Het schrift is een **letteromzetting**. Alleen de aparte encryptietool versleutelt berichten. Deze software is **niet onafhankelijk geaudit**: gebruik haar niet als enige beveiligingsmaatregel voor hooggevoelige informatie.
+- Er is **geen open-sourcelicentie** toegevoegd: GitHub-publicatie betekent niet automatisch dat alle rechten worden vrijgegeven.
+- Een GitHub-commit registreert publicatie en versies, maar is geen officiële merkregistratie of juridisch sluitend eigendomsbewijs.
 
 ## Documentatie
 
-- [GRAMMATICA.md](GRAMMATICA.md) — taalregels
-- [WOORDENBOEK.md](WOORDENBOEK.md) — volledige woordenlijst en voorbeeldzinnen
-- [WOORDENLIJST.tsv](WOORDENLIJST.tsv) — zoekbare bronlijst
-- [OEFENBOEK.md](OEFENBOEK.md) — lessen en oefeningen
-- [LEESMIJ.md](LEESMIJ.md) — installatie en gebruik
-- [HERKOMST.md](HERKOMST.md) — projectgeschiedenis
+- [LEESMIJ.md](LEESMIJ.md) — installatie en bediening
+- [GRAMMATICA.md](GRAMMATICA.md) — grammatica, getallen, zinsvormen
+- [WOORDENBOEK.md](WOORDENBOEK.md) — 370 woorden en hun betekenissen
+- [OEFENBOEK.md](OEFENBOEK.md) — voorbeelden en opdrachten
+- [VERTALER.md](VERTALER.md) — wat de gecontroleerde vertaler precies ondersteunt
+- [VEILIGHEID.md](VEILIGHEID.md) — bedreigingsmodel en cryptografie
+- [HERKOMST.md](HERKOMST.md) — oorsprong van het project
 - [ONTWIKKELINGSVERKLARING.md](ONTWIKKELINGSVERKLARING.md) — particuliere verklaring
-- [CHANGELOG.md](CHANGELOG.md) — veranderingen per versie
-- [CITATION.cff](CITATION.cff) — bronvermelding op GitHub
+- [CHANGELOG.md](CHANGELOG.md) — versiegeschiedenis
+- [CITATION.cff](CITATION.cff) — projectvermelding
 
-## Rechten en status
-
-**Geen officiële merkregistratie.** Wereldwijde uniciteit van naam en inhoud is niet bewezen. De repository heeft op dit moment geen open-sourcelicentie; gebruik binnen de toepasselijke rechten en vraag toestemming waar nodig. De software en documentatie worden verder onderhouden en uitgebreid.
+**Gemaakt om mee te spelen, te leren en verder te ontwikkelen.**

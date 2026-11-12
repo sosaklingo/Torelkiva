@@ -1,82 +1,89 @@
-# Torelkiva — grammatica 1.2
+# Torelkiva — normatieve basisgrammatica 2.0
 
-**Normatieve basisregels voor de huidige kunsttaal.** Ontworpen op initiatief van Marco Beenen in samenwerking met ChatGPT (OpenAI), gestart 12 november 2026.
+**Start:** 12 november 2026. **Initiatiefnemer:** Marco Beenen; uitgewerkt met ChatGPT (OpenAI).
 
-## 1. Klanken
+Dit is de **vastgelegde grammatica voor het basisdomein**, niet een belofte dat alle denkbare menselijke zinnen of dialecten al zijn uitgewerkt. De sectie *Vertaaldomein* geeft aan wat software automatisch kan verwerken.
 
-- De taal wordt geschreven met kleine Latijnse letters; persoonsnamen beginnen eventueel met een hoofdletter.
-- `a e i o u` hebben stabiele korte klinkers. De overige letters klinken ongeveer zoals in het Nederlands, zonder stomme letters.
-- Klemtoon ligt doorgaans op de voorlaatste lettergreep. Echte uitspraakvarianten worden later verder uitgewerkt.
-- Het Torel-schrift is een visuele letteromzetting en vervangt **niet** de grammatica of versleuteling.
+## 1. Schrijfwijze en uitspraak
 
-## 2. Basisvolgorde
+- De basiswoorden gebruiken kleine Latijnse letters; geen letter is stil. De klanken `a, e, i, o, u` worden duidelijk uitgesproken. De `r` is kort rollend.
+- Klemtoon meestal op de voorlaatste lettergreep: `ve-ma`, `to-rel-ki-va`.
+- Eigennamen mogen hoofdletters gebruiken. `Torelkivaem` krijgt dezelfde voorwerpsuitgang als gewone naamwoorden.
+- Vraagzin eindigt op `ke?`, mededeling op `.`, groet op `!`.
+- Het visuele Torel-schrift vervangt uitsluitend letters, niet de grammatica.
 
-Een gewone zin is **SOV**: **onderwerp — (bijwoord/bepaling) — lijdend voorwerp — (tijd) — (ontkenning) — werkwoord**.
+## 2. Basiszin
 
-`Mi viroem mero.` = Ik schrijf een bericht.
+**Onderwerp + (bepalingen) + (bijvoeglijk naamwoord + voorwerp) + (tijd) + (ontkenning) + werkwoord + (vraagpartikel).**
 
-`Miva nori mevaem mero.` = Wij schrijven een nieuw woord.
+| Torelkiva | Nederlands |
+|---|---|
+| `Mi suri.` | Ik slaap. |
+| `Mi viroem mero.` | Ik schrijf een bericht. |
+| `Miva nori mevaem mero.` | Wij schrijven een nieuw woord. |
+| `Mi viroem na mero.` | Ik schreef een bericht. |
+| `Ti viroem sa lona.` | Jij zult een bericht lezen. |
+| `Mi viroem na vo mero.` | Ik schreef geen bericht. |
+| `Ti miem nela ke?` | Begrijp jij mij? |
 
-Zonder lijdend voorwerp: `Mi suri.` = Ik slaap.
+Het werkwoord wordt niet vervoegd naar persoon of meervoud. Er zijn geen lidwoorden en geen grammaticale geslachten.
 
-Het werkwoord verandert niet met persoon of getal.
+## 3. Naamwoorden en voornaamwoorden
 
-## 3. Naamwoorden en meervoud
+- Enkelvoud: `viro` = bericht. Meervoud: `viroin` = berichten.
+- Lijdend voorwerp: `viroem` = bericht als object. Meervoudig object: `viroinem`.
+- Volgorde van uitgangen: **stam + `-in` + `-em`**.
+- Bijvoeglijk naamwoord vóór de stam, zonder uitgang: `nori viroem` = nieuw bericht als object.
+- Voornaamwoorden: `mi` (ik), `ti` (jij), `miva` (wij), `tira` (zij meervoud), `ela` (hij/zij/het).
+- Voorwerpsvormen: `miem`, `tiem`, `mivaem`, `tiraem`, `elaem`.
+- Zonder geslacht of lidwoord kun je `het/de/een` niet altijd eenduidig terugvertalen. De software kiest daarvoor vaak een standaardweergave.
 
-Er zijn geen aparte lidwoorden en geen grammaticale geslachten.
+## 4. Tijd, ontkenning, vragen
 
-- `viro` = een/het bericht (onbepaald).
-- `viroem` = een/het bericht als lijdend voorwerp.
-- `viroin` = berichten.
-- `viroinem` = berichten als lijdend voorwerp.
-- `luma` = vriend; `lumain` = vrienden; `lumainem` = vrienden als lijdend voorwerp.
+- Tegenwoordige tijd: **geen markering**; `Mi viroem mero.`
+- Verleden: `na` direct vóór eventuele ontkenning en het werkwoord; `Mi viroem na mero.`
+- Toekomst: `sa` op dezelfde plek; `Mi viroem sa mero.`
+- Ontkenning: `vo` direct vóór het werkwoord; `Mi viroem sa vo mero.`
+- Ja/nee-vraag: `ke` aan het einde, vlak vóór `?`: `Ti miem nela ke?`
+- Vraagwoorden in de woordenlijst zijn `meka`, `kiva`, `nera`, `toma`, `siva` en `navi`; hun volledige zinsbouw is **nog niet automatisch vertaald**.
+- Voor een zinsdeel gebruik je maximaal één tijdsdeeltje. `na` en `sa` tegelijk is fout.
 
-`-in` is het meervoud, gevolgd door `-em` voor een lijdend voorwerp. De uitgangen worden aan **het naamwoord zelf** geschreven, niet aan het bijvoeglijk naamwoord.
+## 5. Bepalingen en achterzetsels
 
-Bij eigennamen blijft de naam intact: `Torelkivaem` = Torelkiva als lijdend voorwerp.
-
-## 4. Voornaamwoorden
-
-| Onderwerp | Betekenis | Lijdend voorwerp |
-|---|---|---|
-| `mi` | ik | `miem` |
-| `ti` | jij | `tiem` |
-| `miva` | wij | `mivaem` |
-| `tira` | zij (meervoud) | `tiraem` |
-| `ela` | hij/zij/het | `elaem` |
-
-Voor achterzetsels wordt de gewone onderwerpvorm gebruikt: `ti lo` = met jou.
-
-## 5. Heden, verleden, toekomst
-
-- Heden: `Mi viroem mero.` = Ik schrijf een bericht.
-- Verleden: `Mi viroem na mero.` = Ik schreef een bericht.
-- Toekomst: `Mi viroem sa mero.` = Ik zal een bericht schrijven.
-
-`na` en `sa` zijn tijdsdeeltjes, geen gewone zelfstandige woorden. Gebruik er maar **één per werkwoord**.
-
-## 6. Ontkenning en vragen
-
-- `Mi viroem vo mero.` = Ik schrijf geen bericht.
-- `Mi viroem na vo mero.` = Ik schreef geen bericht.
-- `Mi viroem sa vo mero.` = Ik zal geen bericht schrijven.
-- `Ti miem nela ke?` = Begrijp jij mij?
-
-`ke` markeert een ja/nee-vraag. De nieuwe vraagwoorden zijn `meka` (wat), `kiva` (wie), `nera` (waar), `toma` (wanneer), `siva` (waarom) en `navi` (hoe). Geavanceerde vraagzinsbouw wordt nog onderzocht; gebruik de voorbeeldzinnen als houvast, niet als automatische vertaalspecificatie.
-
-## 7. Bijvoeglijke naamwoorden, bijwoorden en achterzetsels
-
-- `nori viro` = nieuw bericht; `nori viroem` = nieuw bericht als lijdend voorwerp.
+- `nori viro` = nieuw bericht.
 - `Mi vado suri.` = Ik slaap nu.
-- `Mi mora ri suri.` = Ik slaap in huis.
-- `Miva ti lo vara.` = Wij spreken met jou.
+- Achterzetsels volgen hun naamwoordgroep: `mora ri` = in huis, `mora la` = op het huis, `ti lo` = met jou, `nava ta` = naar de stad, `mi di` = van mij.
+- Een bepaling staat vóór het lijdend voorwerp of vóór het werkwoord. Voorbeeld: `Mi mora ri suri.` = Ik slaap in huis.
+- Een bezit kan met `di` worden omschreven: `mi di mora` = mijn huis (letterlijk: huis van mij), maar complex bezit en geneste zinnen blijven buiten de automatische vertaler.
 
-Een achterzetsel volgt op de bijbehorende naamwoordgroep: `mora ri` (in huis), `mora la` (op huis), `ti lo` (met jou). Een bepaling staat gewoonlijk vóór het werkwoord.
+## 6. Getallen 0–99 (nieuwe conventie)
 
-## 8. Getallen
+| Waarde | Torelkiva |
+|---|---|
+| 0 | zena |
+| 1 t/m 9 | una, duna, trina, karo, pema, sesa, seva, oka, nova |
+| 10 | desa |
+| 11 | desa-una |
+| 19 | desa-nova |
+| 20 | duna-desa |
+| 21 | duna-desa-una |
+| 90 | nova-desa |
+| 99 | nova-desa-nova |
 
-`zena` (0), `una` (1), `duna` (2), `trina` (3), `karo` (4), `pema` (5), `sesa` (6), `seva` (7), `oka` (8), `nova` (9), `desa` (10). Plaats het telwoord vóór het naamwoord. Bijvoorbeeld: `duna lumain` = twee vrienden. Grotere getallen worden in een latere versie genormeerd.
+Het koppelteken maakt één telwoord van meerdere delen. Er bestaan in versie 2.0 **geen officiële vormen boven 99**. Getallen worden vóór een naamwoord geplaatst: `duna lumain` = twee vrienden. De vertaler herkent getallen nog niet in zinnen.
 
-## 9. Grenzen van versie 1.2
+## 7. Meerdere zinnen, voegwoorden en grenzen
 
-Het is een bruikbare **basisgrammatica**, nog geen volledige formele taal voor ieder mogelijk Nederlands zinstype. Samengestelde tijden, bijzinnen, beleefdheidsvormen, uitgebreidere getallen en genuanceerde betekenissen kunnen in latere versies worden vastgelegd. De woordenlijst, de voorbeeldzinnen en deze gids zijn leidend bij onderlinge verschillen.
+`e` = en, `o` = of, `ba` = maar. Hiermee kun je eenvoudige woordgroepen naast elkaar zetten, bijvoorbeeld `mi e ti` = ik en jij. De automatische vertaler ondersteunt **geen** zinnen met meer dan één persoonsvorm, bijzinnen, passieve vormen, samengestelde tijden, uitgebreide betrekkelijke voornaamwoorden of vrij gevormde vraagzinnen.
+
+## 8. Vertaaldomein 2.0
+
+De vertaler in `vertaler.py` accepteert:
+
+- één zin met `mi/ti/miva/ela/tira` of een ondersteund Nederlands onderwerp;
+- een van de ingebouwde werkwoorden en nul of één lijdend voorwerp;
+- optioneel één bijvoeglijk naamwoord;
+- heden, eenvoudig verleden, toekomst, ontkenning en ja/nee-vraag;
+- enkele bekende eigennamen, groeten en vaste woorden.
+
+Niet-ondersteunde constructies geven **expliciet een fout**. De volledige woordenlijst van 370 woorden bevat ook woorden die de vertaler niet automatisch kan vervoegen of combineren. Zie [VERTALER.md](VERTALER.md). Deze beperking is belangrijk: een kunsttaal kan verder groeien zonder dat de software een foutieve automatische vertaling presenteert.

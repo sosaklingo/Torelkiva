@@ -1,46 +1,23 @@
-# TORELKIVA — woordenboek en grammatica 1.2
+# Torelkiva 2.0 — woordenboek
 
-**Project:** ontwikkeld door Marco Beenen in samenwerking met ChatGPT (OpenAI), begonnen op **12 november 2026**.
+Ontwikkeld op initiatief van **Marco Beenen** in samenwerking met ChatGPT (OpenAI), gestart op **12 november 2026**.
 
-Dit woordenboek bevat **149 basiswoorden**. Het is een *kunsttaal in ontwikkeling*, niet een bestaande natuurlijke taal en nog geen woordenboek met alle begrippen van het dagelijks leven. Het Torel-schrift is een apart schrift; encryptie is een afzonderlijke functie.
+**370 unieke basiswoorden**: 149 woorden uit versie 1.2 en 221 zorgvuldig geselecteerde nieuwe begrippen. Nieuwe woordvormen zijn als uitspreekbare vierlettercombinaties vastgelegd. De lijst is **normatief**: eerdere betekenissen zijn niet bewust gewijzigd.
 
-## Uitspraak
+Een woord in het woordenboek betekent **niet** automatisch dat de gecontroleerde vertaler het in elke zin kan gebruiken. Meer uitleg: [GRAMMATICA.md](GRAMMATICA.md) en [VERTALER.md](VERTALER.md).
 
-Klinkers `a e i o u` worden consequent uitgesproken; twee dezelfde klinkers klinken los. `r` is een korte tongpunt-r. De klemtoon valt meestal op de voorlaatste lettergreep. Er zijn geen stomme letters. Eigen namen behouden hun eigen uitspraak.
-
-## Grammatica in het kort
-
-- **Zinsvolgorde:** onderwerp – (bepalingen) – lijdend voorwerp – (tijd) – (ontkenning) – werkwoord – (vraagpartikel).
-- **Lijdend voorwerp:** achter het laatste woord van het zelfstandig naamwoord komt `-em` (`viroem` = het bericht als object). Ook voornaamwoorden krijgen `-em` (`tiem` = jou).
-- **Meervoud:** `-in` (`lumain` = vrienden). Bij een meervoudig lijdend voorwerp: `-inem` (`lumainem` = vrienden als object).
-- **Bijvoeglijke naamwoorden** staan vóór het zelfstandig naamwoord: `nori viroem` = een nieuw bericht als object.
-- **Tijd:** heden krijgt geen markering, verleden `na`, toekomst `sa`. Tijdwoorden staan vóór het hoofdwerkwoord.
-- **Ontkenning:** `vo` staat vlak vóór het hoofdwerkwoord: `Mi viroem sa vo mero.` = Ik zal het bericht niet schrijven.
-- **Ja/nee-vraag:** sluit de zin af met `ke?`.
-- **Vraagwoorden:** `meka` wat, `kiva` wie, `nera` waar, `toma` wanneer, `siva` waarom, `navi` hoe.
-- **Plaats en relatie:** achterzetsels volgen hun naamwoord: `mora ri` = in het huis; `ti lo` = met jou. Hiervoor gebruik je de onderwerpvorm van voornaamwoorden.
-- **Geen lidwoorden of geslacht:** Nederlands *een*, *de* en *het* worden normaal niet apart vertaald.
-
-Uitgebreide uitleg en voorbeelden: [GRAMMATICA.md](GRAMMATICA.md).
-
-## Voorbeeldzinnen
+## Kernzinnen
 
 | Nederlands | Torelkiva |
 |---|---|
-| Hallo! | Vema! |
-| Ik spreek Torelkiva. | Mi Torelkivaem vara. |
-| Ik begrijp jou. | Mi tiem nela. |
-| Ik begrijp jou niet. | Mi tiem vo nela. |
-| Wij spreken de geheime taal. | Miva sima ravoem vara. |
-| Ik verberg het bericht. | Mi viroem sila. |
-| Wij zullen het geheim beschermen. | Miva simaem sa kiri. |
-| Begrijp jij mij? | Ti miem nela ke? |
-| Ik schreef een bericht. | Mi viroem na mero. |
-| Ik lees een boek. | Mi laviem lona. |
-| Wij schrijven een nieuw woord. | Miva nori mevaem mero. |
-| Jij zult het bericht lezen. | Ti viroem sa lona. |
+| Hallo! | `Vema!` |
+| Ik spreek Torelkiva. | `Mi Torelkivaem vara.` |
+| Ik begrijp jou niet. | `Mi tiem vo nela.` |
+| Ik schreef een bericht. | `Mi viroem na mero.` |
+| Wij schrijven een nieuw woord. | `Miva nori mevaem mero.` |
+| Begrijp jij mij? | `Ti miem nela ke?` |
 
-## Woordenlijst (149 woorden)
+## Woordenlijst
 
 | Torelkiva | Nederlands | Woordsoort |
 |---|---|---|
@@ -193,9 +170,233 @@ Uitgebreide uitleg en voorbeelden: [GRAMMATICA.md](GRAMMATICA.md).
 | `toma` | wanneer | vraagwoord |
 | `siva` | waarom | vraagwoord |
 | `navi` | hoe | vraagwoord |
+| `hugu` | brood | zelfstandig |
+| `mela` | kaas | zelfstandig |
+| `suno` | melk | zelfstandig |
+| `voru` | fruit | zelfstandig |
+| `tazi` | appel | zelfstandig |
+| `bedo` | banaan | zelfstandig |
+| `gelu` | groente | zelfstandig |
+| `tori` | soep | zelfstandig |
+| `togu` | koffie | zelfstandig |
+| `soho` | thee | zelfstandig |
+| `boto` | zout | zelfstandig |
+| `fake` | suiker | zelfstandig |
+| `nete` | tafel | zelfstandig |
+| `mefi` | stoel | zelfstandig |
+| `dumi` | bed | zelfstandig |
+| `vuli` | lamp | zelfstandig |
+| `deta` | muur | zelfstandig |
+| `kudi` | vloer | zelfstandig |
+| `kenu` | dak | zelfstandig |
+| `raka` | tuin | zelfstandig |
+| `jovu` | winkel | zelfstandig |
+| `kuku` | school | zelfstandig |
+| `vaka` | ziekenhuis | zelfstandig |
+| `laho` | straat | zelfstandig |
+| `rale` | plein | zelfstandig |
+| `bamo` | park | zelfstandig |
+| `zoza` | trein | zelfstandig |
+| `daki` | bus | zelfstandig |
+| `jofu` | auto | zelfstandig |
+| `negu` | fiets | zelfstandig |
+| `dena` | boot | zelfstandig |
+| `holu` | vliegtuig | zelfstandig |
+| `mepu` | reis | zelfstandig |
+| `tusa` | kaart | zelfstandig |
+| `raba` | richting | zelfstandig |
+| `zovo` | afstand | zelfstandig |
+| `miso` | uur | zelfstandig |
+| `sagi` | minuut | zelfstandig |
+| `tuno` | seconde | zelfstandig |
+| `kaza` | week | zelfstandig |
+| `ture` | maand | zelfstandig |
+| `jezo` | jaar | zelfstandig |
+| `movu` | verjaardag | zelfstandig |
+| `bisu` | kalender | zelfstandig |
+| `jiko` | datum | zelfstandig |
+| `pidu` | afspraak | zelfstandig |
+| `tezu` | gesprek | zelfstandig |
+| `nobu` | brief | zelfstandig |
+| `geko` | letter | zelfstandig |
+| `bupu` | teken | zelfstandig |
+| `gesa` | vertaling | zelfstandig |
+| `foti` | betekenis | zelfstandig |
+| `tibe` | regel | zelfstandig |
+| `vugo` | voorbeeld | zelfstandig |
+| `suje` | les | zelfstandig |
+| `koko` | leerling | zelfstandig |
+| `gozi` | leraar | zelfstandig |
+| `mije` | vraag | zelfstandig |
+| `voka` | fout | zelfstandig |
+| `neko` | oplossing | zelfstandig |
+| `puro` | probleem | zelfstandig |
+| `nila` | idee | zelfstandig |
+| `noma` | plan | zelfstandig |
+| `jaga` | doel | zelfstandig |
+| `zoki` | keuze | zelfstandig |
+| `jefe` | besluit | zelfstandig |
+| `rize` | begin | zelfstandig |
+| `toni` | einde | zelfstandig |
+| `pire` | programmacode | zelfstandig |
+| `sohi` | software | zelfstandig |
+| `jona` | bestand | zelfstandig |
+| `vagu` | map (bestanden) | zelfstandig |
+| `vike` | project | zelfstandig |
+| `zima` | versie | zelfstandig |
+| `bube` | update | zelfstandig |
+| `veri` | test | zelfstandig |
+| `jeju` | netwerk | zelfstandig |
+| `veja` | server | zelfstandig |
+| `ruze` | website | zelfstandig |
+| `roti` | internet | zelfstandig |
+| `gona` | e-mail | zelfstandig |
+| `kesa` | wachtzin | zelfstandig |
+| `loru` | versleuteling | zelfstandig |
+| `punu` | controle | zelfstandig |
+| `rake` | melding | zelfstandig |
+| `lafo` | toetsenbord | zelfstandig |
+| `bunu` | muis (computer) | zelfstandig |
+| `veho` | knop | zelfstandig |
+| `jeka` | batterij | zelfstandig |
+| `gese` | motor | zelfstandig |
+| `sanu` | machine | zelfstandig |
+| `bodu` | gereedschap | zelfstandig |
+| `vozo` | hamer | zelfstandig |
+| `bale` | schroef | zelfstandig |
+| `nari` | moer (techniek) | zelfstandig |
+| `koku` | bout | zelfstandig |
+| `naro` | wiel | zelfstandig |
+| `mado` | kabel | zelfstandig |
+| `vota` | meter (meetinstrument) | zelfstandig |
+| `hina` | spanning (elektrisch) | zelfstandig |
+| `ropa` | stroom (elektrisch) | zelfstandig |
+| `zota` | weerstand (elektrisch) | zelfstandig |
+| `digo` | meting | zelfstandig |
+| `leme` | onderhoud | zelfstandig |
+| `zubu` | reparatie | zelfstandig |
+| `mide` | handleiding | zelfstandig |
+| `jori` | veiligheid | zelfstandig |
+| `vogu` | vertrouwen | zelfstandig |
+| `rabo` | hoop | zelfstandig |
+| `nuhe` | trots | zelfstandig |
+| `bife` | geluk | zelfstandig |
+| `fulo` | verdriet | zelfstandig |
+| `baba` | angst | zelfstandig |
+| `hofu` | vrede | zelfstandig |
+| `dana` | moed | zelfstandig |
+| `nojo` | herinnering | zelfstandig |
+| `foso` | droom | zelfstandig |
+| `bune` | regen | zelfstandig |
+| `luku` | wind | zelfstandig |
+| `behi` | sneeuw | zelfstandig |
+| `nuka` | zee | zelfstandig |
+| `kabi` | rivier | zelfstandig |
+| `ripu` | berg | zelfstandig |
+| `bepi` | bos | zelfstandig |
+| `heje` | steen | zelfstandig |
+| `noza` | zand | zelfstandig |
+| `zapu` | gras | zelfstandig |
+| `voju` | oog | zelfstandig |
+| `holo` | oor | zelfstandig |
+| `kise` | hand | zelfstandig |
+| `sudu` | voet | zelfstandig |
+| `mogu` | hoofd | zelfstandig |
+| `riso` | hart | zelfstandig |
+| `medi` | lichaam | zelfstandig |
+| `bone` | gezondheid | zelfstandig |
+| `bofa` | dokter | zelfstandig |
+| `zoze` | ouder | zelfstandig |
+| `paso` | broer | zelfstandig |
+| `nedi` | zus | zelfstandig |
+| `fode` | moeder | zelfstandig |
+| `tizu` | vader | zelfstandig |
+| `vugu` | zoon | zelfstandig |
+| `paki` | dochter | zelfstandig |
+| `kalu` | partner | zelfstandig |
+| `tumo` | collega | zelfstandig |
+| `jego` | buur | zelfstandig |
+| `gevi` | repareren | werkwoord |
+| `lusi` | bouwen | werkwoord |
+| `vuke` | testen | werkwoord |
+| `dizo` | controleren | werkwoord |
+| `loju` | meten | werkwoord |
+| `lupo` | zoeken | werkwoord |
+| `jejo` | sturen | werkwoord |
+| `tuze` | ontvangen | werkwoord |
+| `boke` | delen | werkwoord |
+| `jati` | bewaren | werkwoord |
+| `risa` | openklikken | werkwoord |
+| `vuru` | kopiëren | werkwoord |
+| `refe` | plakken | werkwoord |
+| `sina` | vertalen | werkwoord |
+| `jide` | versleutelen | werkwoord |
+| `kato` | ontsleutelen | werkwoord |
+| `sohe` | tekenen | werkwoord |
+| `zoku` | zingen | werkwoord |
+| `joba` | rijden | werkwoord |
+| `mima` | fietsen | werkwoord |
+| `kaho` | zwemmen | werkwoord |
+| `pifi` | vliegen | werkwoord |
+| `gepe` | ontmoeten | werkwoord |
+| `lumu` | vertellen | werkwoord |
+| `gahe` | onthouden | werkwoord |
+| `beki` | vergeten | werkwoord |
+| `biri` | proberen | werkwoord |
+| `juvu` | beginnen | werkwoord |
+| `suze` | stoppen | werkwoord |
+| `duzu` | veranderen | werkwoord |
+| `bola` | kiezen | werkwoord |
+| `nibu` | beslissen | werkwoord |
+| `zajo` | geloven | werkwoord |
+| `sihe` | hopen | werkwoord |
+| `meko` | vertrouwen | werkwoord |
+| `ruba` | delen (technisch) | werkwoord |
+| `duta` | oud | bijvoeglijk |
+| `zipe` | jong | bijvoeglijk |
+| `risu` | moeilijk | bijvoeglijk |
+| `vodo` | makkelijk | bijvoeglijk |
+| `veda` | eerlijk | bijvoeglijk |
+| `fuka` | duidelijk | bijvoeglijk |
+| `diga` | onduidelijk | bijvoeglijk |
+| `topa` | precies | bijvoeglijk |
+| `ripo` | belangrijk | bijvoeglijk |
+| `dumo` | handig | bijvoeglijk |
+| `bahi` | bruikbaar | bijvoeglijk |
+| `kuko` | kapot | bijvoeglijk |
+| `haju` | heel (ongeschonden) | bijvoeglijk |
+| `pafa` | open | bijvoeglijk |
+| `meda` | gesloten | bijvoeglijk |
+| `bape` | gelukkig | bijvoeglijk |
+| `kulo` | verdrietig | bijvoeglijk |
+| `nibe` | bang | bijvoeglijk |
+| `jezu` | trots | bijvoeglijk |
+| `dave` | sterk (elektrisch) | bijvoeglijk |
+| `lire` | stil | bijvoeglijk |
+| `zase` | hier | bijwoord |
+| `lana` | daar | bijwoord |
+| `fonu` | ergens | bijwoord |
+| `zapi` | nergens | bijwoord |
+| `faje` | samen | bijwoord |
+| `sate` | alleen | bijwoord |
+| `raju` | misschien | bijwoord |
+| `rape` | zeker | bijwoord |
+| `meno` | eerst | bijwoord |
+| `savi` | daarna | bijwoord |
+| `meke` | binnen | bijwoord |
+| `tahe` | buiten | bijwoord |
+| `foge` | vandaag | bijwoord |
+| `lete` | morgen vroeg | bijwoord |
+| `tihi` | meteen | bijwoord |
+| `toho` | opnieuw | bijwoord |
+| `piha` | bijna | bijwoord |
+| `buno` | genoeg | bijwoord |
 
-## Zoeken en oefenen
+## Zelf oefenen
 
-De doorzoekbare bron is [WOORDENLIJST.tsv](WOORDENLIJST.tsv). Met `python taal.py zoek geheim` vind je onder andere `sima`. Met `python taal.py oefen` oefen je woorden. De tool is **geen automatische zinsvertaler**; je gebruikt de regels om zelf zinnen te maken.
+- `python taal.py zoek regen`: zoeken op Nederlands of Torelkiva.
+- `python taal.py woord vema`: exacte opzoeking.
+- `python taal.py oefen`: vijf willekeurige oefeningen.
+- `python vertaler.py --van nl "Ik schrijf een bericht."`: gecontroleerde zinsvertaling.
 
-De lijst mag in toekomstige versies worden uitgebreid. Oude betekenissen en regels worden waar mogelijk behouden.
+De machineleesbare bron is [WOORDENLIJST.tsv](WOORDENLIJST.tsv).

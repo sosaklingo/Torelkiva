@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Torelkiva 1.2: berichten en (kleine) bestanden versleutelen.
+"""Torelkiva 2.0: berichten en (kleine) bestanden versleutelen.
 
 Beveiliging: scrypt (N=2^15, r=8, p=1) + AES-256-GCM met een verse
 willekeurige salt en nonce per bericht. Vereist: cryptography.
@@ -18,9 +18,11 @@ try:
     from cryptography.exceptions import InvalidTag
     from cryptography.hazmat.primitives.ciphers.aead import AESGCM
     from cryptography.hazmat.primitives.kdf.scrypt import Scrypt
-except ImportError:
-    print("Deze tool heeft 'cryptography' nodig. Installeer met: python -m pip install cryptography", file=sys.stderr)
-    sys.exit(2)
+except ImportError:  # De desktopapp moet zonder cryptography ook woorden kunnen tonen.
+    class InvalidTag(Exception):
+        pass
+    AESGCM = None
+    Scrypt = None
 
 MAGIC = b"TK1"
 PREFIX = "TK1:"
@@ -34,6 +36,8 @@ MAX_TOKEN_SIZE = len(PREFIX) + ((MAX_ENCRYPTED_SIZE + 2) // 3) * 4
 
 
 def _key(passphrase: str, salt: bytes) -> bytes:
+    if Scrypt is None or AESGCM is None:
+        raise RuntimeError("Bibliotheek cryptography ontbreekt. Installeer met: python -m pip install -r requirements.txt")
     kdf = Scrypt(salt=salt, length=32, n=2**15, r=8, p=1)
     return kdf.derive(passphrase.encode("utf-8"))
 
@@ -103,8 +107,8 @@ def _save_new(path: Path, data: bytes) -> None:
 
 
 def run() -> int:
-    parser = argparse.ArgumentParser(description="Torelkiva 1.2 – versleutel en ontsleutel berichten of bestanden")
-    parser.add_argument("--versie", action="version", version="Torelkiva 1.2 (bestandsformaat TK1)")
+    parser = argparse.ArgumentParser(description="Torelkiva 2.0 – versleutel en ontsleutel berichten of bestanden")
+    parser.add_argument("--versie", action="version", version="Torelkiva 2.0 (bestandsformaat TK1)")
     parser.add_argument("actie", choices=["versleutel", "ontsleutel"], help="Kies je actie")
     parser.add_argument("--bestand", type=Path, help="Optioneel: werk met een tekstbestand of ander klein bestand")
     parser.add_argument("--stdin", action="store_true", help="Lees tekst/een TK1-code van standaardinvoer (ondersteunt meerdere regels)")
@@ -161,7 +165,7 @@ def run() -> int:
                 print("\nJe oorspronkelijke tekst:\n")
                 print(result)
         return 0
-    except (ValueError, OSError, UnicodeError) as exc:
+    except (ValueError, OSError, UnicodeError, RuntimeError) as exc:
         print(f"Fout: {exc}", file=sys.stderr)
         return 1
 

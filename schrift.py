@@ -6,6 +6,7 @@ from pathlib import Path
 import sys
 
 ALPHABET = "abcdefghijklmnopqrstuvwxyz"
+MAX_SVG_TEXT = 2000
 
 
 def paths(letter: str) -> str:
@@ -47,6 +48,8 @@ def alphabet_svg() -> str:
 
 
 def sentence_svg(sentence: str) -> str:
+    if len(sentence) > MAX_SVG_TEXT:
+        raise ValueError("Maximaal 2.000 tekens voor één SVG-afbeelding.")
     x, y = 25, 70
     items = []
     maxx = 0

@@ -1,13 +1,18 @@
 {
-  "project": "Torelkiva",
-  "description_nl": "Kunsttaal met eigen grammatica, woordenboek, schrift en afzonderlijke encryptietool.",
-  "description_en": "Constructed language with grammar, vocabulary, visual script, and separate encryption utility.",
+  "name": "Torelkiva",
+  "version": "2.0",
+  "status": "documented core language and software release",
+  "started": "2026-11-12",
+  "published": "2026-11-13",
   "initiator": "Marco Beenen",
-  "development_collaboration": "ChatGPT (OpenAI)",
-  "development_started": "2026-11-12",
-  "version": "1.2",
-  "base_vocabulary_count": 149,
+  "assistant": "ChatGPT (OpenAI)",
+  "source": "https://github.com/sosaklingo/Torelkiva",
+  "dictionary_entries": 370,
+  "translator_scope": "controlled simple sentences only",
+  "script_is_encryption": false,
   "encryption_format": "TK1",
+  "security_audited": false,
   "trademark_registered": false,
-  "openai_officially_endorsed": false
+  "openai_officially_endorsed": false,
+  "license": "All rights reserved by applicable law; no explicit open-source license"
 }

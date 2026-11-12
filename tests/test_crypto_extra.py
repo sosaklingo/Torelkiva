@@ -1,4 +1,5 @@
 """Randgevallen en compatibiliteit met het oorspronkelijke TK1-formaat."""
+import os
 from pathlib import Path
 import sys
 import tempfile
@@ -26,6 +27,7 @@ class CryptoExtraTests(unittest.TestCase):
                     decrypt_text(code, P)
     def test_padded_token(self):
         code = encrypt_text('Hallo', P)
+        # TK1 hoort zonder padding te worden uitgewisseld; extra '=' wordt afgekeurd.
         with self.assertRaises(ValueError):
             decrypt_text(code + '=', P)
     def test_maximum_binaire_invoer(self):

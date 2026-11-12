@@ -1,20 +1,13 @@
-# Torelkiva op GitHub — publicatie en onderhoud
+# Torelkiva — publicatie en onderhoud op GitHub
 
-Torelkiva staat openbaar op **https://github.com/sosaklingo/Torelkiva**.
+De openbare projectrepository is https://github.com/sosaklingo/Torelkiva . Een upload naar GitHub is geen merkregistratie, juridisch sluitend eigendomsbewijs of officiële OpenAI-goedkeuring.
 
-## Herkomst
+## Versie bijwerken
 
-Initiatiefnemer: **Marco Beenen**. Ontwikkeld in samenwerking met **ChatGPT (OpenAI)** sinds **12 november 2026**. Deze vermelding staat ook in `README.md`, `HERKOMST.md` en `CITATION.cff`.
+1. Voer lokaal de tests uit: `python -m unittest discover -s tests -v`.
+2. Controleer `PROJECT.json`, `CITATION.cff`, `CHANGELOG.md`, het woordenboek en de versieaanduidingen.
+3. Genereer het ZIP-pakket en vernieuw `SHA256SUMS.txt` voordat je publiceert.
+4. Upload de gewijzigde bestanden als Git-commit en controleer de GitHub Actions-testen.
+5. Controleer dat de publieke README de juiste ontwikkelaarsvermelding bevat.
 
-## Een nieuwe versie publiceren
-
-1. Bewaar eerst een kopie van de huidige code en documentatie.
-2. Wijzig de bestanden en verhoog het projectversienummer in `PROJECT.json`, `CITATION.cff` en `CHANGELOG.md`.
-3. Controleer of woordenschat en grammatica elkaar niet tegenspreken.
-4. Draai lokaal `python -m unittest discover -s tests -v`.
-5. Commit en publiceer de wijzigingen met GitHub. De workflow `.github/workflows/tests.yml` voert ook online tests uit.
-6. Vernieuw `SHA256SUMS.txt` na het wijzigen van bestanden, omdat oude controlesommen anders niet meer kloppen. Dit bestand bevat geen hash van zichzelf.
-
-## Privacy en rechten
-
-Zet **nooit** wachtwoorden, geheime sleutels, privégesprekken of persoonlijke informatie in een openbare GitHub-repository. De taal en de code zijn openbaar. GitHub-publicatie is **geen** officiële merkregistratie, en de software is niet onafhankelijk beveiligingsgeaudit.
+Publiceer nooit wachtzinnen, echte privéberichten, herstelcodes of tokens. Geef de GitHub-koppeling alleen toegang tot de repository die voor dit project nodig is.

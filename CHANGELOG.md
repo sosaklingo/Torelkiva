@@ -1,22 +1,22 @@
-# Wijzigingsgeschiedenis
+# Wijzigingen — Torelkiva
+
+## 2.0 — 13 november 2026
+
+- Woordenschat van 149 naar **370** unieke lemmas, met stabiele originele basis.
+- Uitspraak, objectmarkering, tijdsvormen, vraag- en getalsconventies vastgelegd.
+- Gecontroleerde vertaler Nederlands ↔ Torelkiva voor gedocumenteerde eenvoudige zinnen; niet-ondersteunde input wordt expliciet geweigerd.
+- Offline miniwoordenboek en voorbeeldzinnen toegevoegd; apart van encryptie.
+- Grafisch desktopprogramma (`app.py`) met tabs voor woorden, vertalen, letterweergave en lokale encryptie.
+- SVG-generator begrensd om ongewenst enorme bestanden te voorkomen.
+- Extra taal-, vertaal-, bestands- en beveiligingstests en GitHub CI.
+- Veiligheids- en installatiehandleidingen herzien.
+- TK1-salt, nonce, sleutelafleiding en AES-256-GCM **ongewijzigd**: oudere berichten blijven compatibel.
 
 ## 1.2 — 12 november 2026
 
-- **149 basiswoorden**, ondergebracht in een machineleesbare, doorzoekbare woordenlijst (`WOORDENLIJST.tsv`).
-- Taalregels verder uitgewerkt in `GRAMMATICA.md`, lessen en oefeningen toegevoegd (`OEFENBOEK.md`).
-- Nieuwe `taal.py` om woorden op te zoeken, voorbeeldzinnen te bekijken en te oefenen.
-- Encryptietool: begrenzing voor te grote invoer, nieuwe `--stdin`-optie voor meerregelige tekst, veilige uitvoer en duidelijkere foutmeldingen.
-- SVG-schrift: niet-afdrukbare tekens worden veilig vervangen, zodat XML geldig blijft.
-- Uitgebreidere geautomatiseerde tests voor cryptografie, woordenlijst en schrift.
-- Compatible bestandsformaat `TK1:` behouden, zodat eerder versleutelde berichten leesbaar blijven met de juiste wachtzin.
-- Projectdocumentatie bijgewerkt; herkomst en startdatum behouden.
+- 149 woorden, basisgrammatica, oefenboek en zoekprogramma.
+- Verbeterde CLI, uitgebreidere tests en automatische CI.
 
 ## 1.1 — 12 november 2026
 
-- Eerste werkende Torelkiva-miniwoordenlijst met grammatica en voorbeeldzinnen.
-- Eerste eigen Torel-schrift (SVG) en encryptietool (AES-256-GCM/scrypt).
-- Windows- en Linux-startscripts, ontwikkelingsverklaring en GitHub-documentatie.
-
-## Let op
-
-Versienummers zijn projectmijlpalen en **geen** officiële merk- of auteursrechtregistraties of onafhankelijke cryptografische audit.
+- Eerste openbare versie met woordenboek, Torel-schrift, projectherkomst en TK1-versleuteling.

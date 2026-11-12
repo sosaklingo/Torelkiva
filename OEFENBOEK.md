@@ -1,47 +1,55 @@
-# Torelkiva — eerste lessen en oefeningen
+# Torelkiva — oefenboek 2.0
 
-## Les 1: kennismaken
+## Les 1 — groeten en basiswoorden
 
-- `Vema!` — Hallo!
-- `Savo!` — Tot ziens!
-- `Mi Torelkivaem vara.` — Ik spreek Torelkiva.
-- `Ti miem nela ke?` — Begrijp jij mij?
+`vema` = hallo · `savo` = tot ziens · `mi` = ik · `ti` = jij · `miva` = wij · `ravo` = taal · `viro` = bericht.
 
-## Les 2: zinnen maken
+**Oefening:** vertaal `Vema!`, `Savo!`, `mi`, `miva`.  
+**Antwoorden:** Hallo!, Tot ziens!, ik, wij.
 
-1. Kies een onderwerp: `mi`, `ti`, `miva`, `tira` of `ela`.
-2. Kies een naamwoord als lijdend voorwerp en voeg `-em` toe.
-3. Sluit af met een werkwoord, bijvoorbeeld `mero` (schrijven).
-4. Gebruik `na` voor verleden tijd, `sa` voor toekomst, `vo` voor ontkenning en `ke?` voor een ja/nee-vraag.
+## Les 2 — onderwerp, voorwerp, werkwoord
 
-Voorbeeld: `Miva nori viroem sa mero.` = Wij zullen een nieuw bericht schrijven.
+SOV = onderwerp, lijdend voorwerp, werkwoord. Lijdend voorwerp heeft `-em`.
 
-## Oefeningen
+`Mi viroem mero.` = Ik schrijf een bericht.  
+`Mi laviem lona.` = Ik lees een boek.  
+`Mi tiem nela.` = Ik begrijp jou.
 
-Vertaal de volgende zinnen naar Torelkiva. De antwoorden staan onderaan.
+**Oefening:** schrijf "Ik begrijp jou niet."  
+**Antwoord:** `Mi tiem vo nela.`
 
-1. Hallo!
-2. Ik schrijf een bericht.
-3. Wij lezen een boek.
-4. Jij begrijpt mij.
-5. Ik begrijp jou niet.
-6. Wij zullen het bericht beschermen.
-7. Jij schreef een woord.
-8. Begrijp jij mij?
-9. Ik slaap.
-10. Wij zullen een nieuw woord schrijven.
+## Les 3 — tijd
 
-## Antwoorden
+`na` is verleden, `sa` is toekomst; beide staan vlak voor het werkwoord, met `vo` na de tijd.
 
-1. `Vema!`
-2. `Mi viroem mero.`
-3. `Miva laviem lona.`
-4. `Ti miem nela.`
-5. `Mi tiem vo nela.`
-6. `Miva viroem sa kiri.`
-7. `Ti mevaem na mero.`
-8. `Ti miem nela ke?`
-9. `Mi suri.`
-10. `Miva nori mevaem sa mero.`
+`Mi viroem na mero.` = Ik schreef een bericht.  
+`Miva viroem sa mero.` = Wij zullen een bericht schrijven.
 
-**Zelf oefenen op de computer:** `python taal.py oefen`.
+**Oefening:** schrijf "Ik zal een bericht niet schrijven" in de betekenis *ik zal geen bericht schrijven*.  
+**Antwoord:** `Mi viroem sa vo mero.`
+
+## Les 4 — vragen
+
+Voeg aan het eind `ke?` toe.
+
+`Ti miem nela ke?` = Begrijp jij mij?  
+`Ti viroem lona ke?` = Lees jij een bericht?
+
+## Les 5 — nieuwe woorden uit het woordenboek
+
+Zoek in `WOORDENLIJST.tsv` of met `python taal.py zoek` naar brood, fiets, reparatie, computer, lamp, morgen en veiligheid. Noteer hun Torelkiva-vormen en lees ze hardop uit.
+
+## Les 6 — het alfabet en veiligheid
+
+Open `TOREL_ALFABET.svg` en probeer een zin met `python schrift.py`. De tekens zijn voor de uitstraling en de leesbaarheid van het project; iedereen met het alfabet kan teruglezen wat je schreef. Voor geheimhouding kun je los daarvan `torelkiva.py` gebruiken.
+
+**Controleer jezelf:**
+
+1. Wat betekent `-em`? — *Lijdend voorwerp*.
+2. Wat betekent `-in`? — *Meervoud*.
+3. Wat betekent `na`? — *Verleden*.
+4. Wat betekent `sa`? — *Toekomst*.
+5. Wat betekent `vo`? — *Niet / ontkenning*.
+6. Wat betekent `ke?`? — *Ja/nee-vraag*.
+
+Extra oefenprogramma: `python taal.py oefen`.

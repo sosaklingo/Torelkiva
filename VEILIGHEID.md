@@ -1,36 +1,44 @@
-# Beveiliging en privacy
+# Torelkiva 2.0 — beveiliging en beperkingen
 
-Torelkiva bestaat uit drie aparte onderdelen:
+## Drie verschillende onderdelen
 
-1. **De kunsttaal**: bedoeld voor creatieve communicatie; op zichzelf niet geheim zodra het woordenboek openbaar is.
-2. **Torel-schrift**: symbolen voor letters; eenvoudig te ontcijferen met het alfabet. Dit is geen cryptografie.
-3. **Encryptietool**: gebruikt het bestaande AES-256-GCM-algoritme en scrypt-wachtwoordafleiding. Dit biedt echte technische versleuteling, maar is niet onafhankelijk geaudit.
+1. **Torelkiva-taal:** woorden en grammatica; geen geheimhouding.
+2. **Torel-schrift:** omzetting van letters naar eigen symbolen; geen cryptografische geheimhouding.
+3. **Encryptieprogramma (`torelkiva.py`):** aparte versleutelsoftware. Alleen deze stap maakt inhoud cryptografisch onleesbaar zonder de juiste wachtzin.
 
-## Gebruik
+## TK1-formaat (ongewijzigd vanaf 1.1)
 
-- Neem een lange, unieke, willekeurige wachtzin. Deel die niet via hetzelfde kanaal als het bericht.
-- Publiceer **nooit** wachtzinnen, privésleutels, tokens, persoonlijke chatlogs of geheime berichten in GitHub.
-- De originele bestanden blijven bestaan na versleutelen; ze worden niet automatisch gewist.
-- De encryptietool biedt geen afzenderidentiteit, sleuteluitwisseling of perfect forward secrecy.
-- Een geïnfecteerd of gedeeld apparaat kan de inhoud of wachtzin onderscheppen.
-- Gebruik voor zeer vertrouwelijke communicatie bij voorkeur een gerenommeerde end-to-end versleutelde berichtenapp.
+- `TK1` (3 bytes): magic/version identifier.
+- 16 bytes willekeurige **salt** en 12 bytes willekeurige **nonce**.
+- **scrypt** KDF: N = 2^15, r = 8, p = 1, 32-byte sleutel.
+- **AES-256-GCM** met vaste AAD `Torelkiva-Encrypted-Message-v1`.
+- GCM-authenticatietag van 16 bytes aan het eind.
+- Tekstvorm `TK1:` gevolgd door URL-safe base64 zonder padding.
+- Een willekeurige salt en nonce worden per bericht opnieuw gegenereerd. Dit is belangrijk voor de veiligheid; gebruik geen handgemaakte salt of nonce.
 
-## Techniek van bestandsformaat TK1
+De encoder houdt de bestaande indeling in stand zodat eerder uitgebrachte TK1-berichten (met correcte wachtzin) leesbaar blijven.
 
-- AES-256-GCM voor authenticatie en versleuteling.
-- scrypt N=32768, r=8, p=1, sleutel 32 bytes.
-- Willekeurige salt van 16 bytes en nonce van 12 bytes per bericht.
-- Binaire opbouw `TK1 || salt || nonce || ciphertext+tag`, als tekst met `TK1:` en URL-veilige base64.
-- Maximaal 50 MiB bij bestanden.
+## Risico's en aanbevolen gebruik
 
-## Rapporteren
+- **Niet onafhankelijk beveiligingsgeaudit**. Geen garantie op foutloosheid of geschiktheid voor hooggevoelige gegevens.
+- Gebruik een sterke, unieke wachtzin die niet op GitHub, in een screenshot of bij het bericht staat.
+- Deel de wachtzin niet via hetzelfde berichtkanaal als de code.
+- Verlies van de wachtzin betekent doorgaans verlies van toegang tot de inhoud. Er is geen herstelknop en geen server.
+- De oorspronkelijke invoerbestanden worden **niet** automatisch verwijderd; ook het klembord en uitvoervakken kunnen gevoelige tekst blijven bevatten.
+- Deze tool biedt geen bescherming tegen virussen, keyloggers, malware, een gehackte pc, screenshots of verkeerd verstuurde berichten.
+- Maximaal 50 MiB invoer; geen streaming voor grote bestanden. De gehele invoer wordt in het werkgeheugen geladen.
+- Bestaande uitvoerbestanden worden niet overschreven; ook geen automatische bestandsvernietiging.
+- Er is geen account, synchronisatie, server, netwerkdienst of verborgen upload in de programma's.
+- De offline HTML-pagina bevat **geen** encryptiefunctie.
 
-Vermeld bij meldingen over fouten de betrokken softwareversie en een minimale reproductie zonder echte wachtzinnen of gevoelige inhoud.
+## Testen
 
-## Extra aandachtspunten bij versie 1.2
+```bash
+python -m unittest discover -s tests -v
+```
 
-- De tool weigert invoer groter dan 50 MiB, en laat bestaande uitvoerbestanden ongemoeid.
-- `--stdin` accepteert meerregelige tekst, maar er is nog steeds een interactieve terminal nodig om de geheime wachtzin in te voeren.
-- Een `TK1:`-code bevat versie-informatie en gecodeerde gegevens, **niet** de geheime wachtzin. Deel codes alleen met mensen die je vertrouwt.
-- Er is geen onafhankelijke cryptografische audit of onafhankelijke penetratietest uitgevoerd. Alle lokale tests samen vormen **geen** beveiligingscertificering.
-- Doe zelf een back-up van je versleutelde informatie én bewaar de wachtzin veilig voordat je het onversleutelde origineel verwijdert.
+Tests controleren onder andere rondreizen van tekst en binaire inhoud, verkeerde wachtzinnen, wijzigen van versleutelde inhoud, beschadigde en ongeldige tokens, compatibiliteit en bestandoverschrijving. Een geslaagde test is **geen onafhankelijke veiligheidsaudit**.
+
+## Melding van beveiligingsproblemen
+
+Plaats **geen geheime wachtzinnen, persoonlijke berichten of toegangscodes** in openbare GitHub-issues. Meld een probleem met alleen een synthetische demonstratie, zonder persoonsgegevens of geheime sleutels.

@@ -10,24 +10,37 @@ if %errorlevel%==0 (
 :menu
 cls
 echo =======================================
-echo        TORELKIVA 1.2
+echo        TORELKIVA 2.0
 echo =======================================
-echo 1. Zoek woorden
-echo 2. Oefen Torelkiva
-echo 3. Versleutel tekst
-echo 4. Ontsleutel tekst
-echo 5. Bekijk Torel-alfabet
-echo 6. Afsluiten
-echo.
-choice /c 123456 /n /m "Kies een optie (1-6): "
-if errorlevel 6 goto einde
-if errorlevel 5 goto alfabet
-if errorlevel 4 goto ontsleutel
-if errorlevel 3 goto versleutel
-if errorlevel 2 goto oefen
-if errorlevel 1 goto zoek
+echo 1. Open grafisch programma
+ echo 2. Vertaal een Nederlandse zin
+ echo 3. Zoek een woord
+ echo 4. Oefen Torelkiva
+ echo 5. Versleutel een bericht
+ echo 6. Ontsleutel een bericht
+ echo 7. Bekijk Torel-alfabet
+ echo 8. Afsluiten
+ echo.
+choice /c 12345678 /n /m "Kies een optie (1-8): "
+if errorlevel 8 goto einde
+if errorlevel 7 goto alfabet
+if errorlevel 6 goto ontsleutel
+if errorlevel 5 goto versleutel
+if errorlevel 4 goto oefen
+if errorlevel 3 goto zoek
+if errorlevel 2 goto vertaal
+if errorlevel 1 goto app
+:app
+%PY% app.py
+pause
+goto menu
+:vertaal
+set /p "ZIN=Typ een eenvoudige Nederlandse zin: "
+%PY% vertaler.py --van nl "%ZIN%"
+pause
+goto menu
 :zoek
-set /p "WOORD=Geef een Nederlands of Torelkiva-woord: "
+set /p "WOORD=Zoekwoord: "
 %PY% taal.py zoek "%WOORD%"
 pause
 goto menu
