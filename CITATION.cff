@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "Vermeld bij gebruik of bespreking van Torelkiva de initiatiefnemer Marco Beenen en de samenwerking met ChatGPT (OpenAI)."
+title: "Torelkiva: een geheime kunsttaal met eigen schrift en encryptietool"
+authors:
+  - family-names: Beenen
+    given-names: Marco
+version: "1.1"
+date-released: 2026-11-12
+abstract: >-
+  Torelkiva is een experimentele kunsttaal, begonnen op initiatief van
+  Marco Beenen en uitgewerkt in samenwerking met ChatGPT (OpenAI).
+keywords:
+  - Torelkiva
+  - kunsttaal
+  - constructed language
+  - conlang
+  - geheimtaal
+  - schrijven
+  - encryptie
