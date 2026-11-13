@@ -1,8 +1,8 @@
-# Torelkiva 2.1 — woordenboek
+# Torelkiva 2.2 — woordenboek
 
 Ontwikkeld op initiatief van **Marco Beenen** in samenwerking met ChatGPT (OpenAI), gestart op **12 november 2026**.
 
-**370 unieke basiswoorden**: 149 woorden uit versie 1.2 en 221 zorgvuldig geselecteerde nieuwe begrippen. Nieuwe woordvormen zijn als uitspreekbare vierlettercombinaties vastgelegd. De lijst is **normatief**: eerdere betekenissen zijn niet bewust gewijzigd.
+**373 unieke basiswoorden**: 149 woorden uit versie 1.2 en 221 zorgvuldig geselecteerde nieuwe begrippen en 3 aanvullende grammaticale woorden. Nieuwe woordvormen zijn als uitspreekbare vierlettercombinaties vastgelegd. De lijst is **normatief**: eerdere betekenissen zijn niet bewust gewijzigd.
 
 Een woord in het woordenboek betekent **niet** automatisch dat de gecontroleerde vertaler het in elke zin kan gebruiken. Meer uitleg: [GRAMMATICA.md](GRAMMATICA.md) en [VERTALER.md](VERTALER.md).
 
@@ -391,12 +391,6 @@ Een woord in het woordenboek betekent **niet** automatisch dat de gecontroleerde
 | `toho` | opnieuw | bijwoord |
 | `piha` | bijna | bijwoord |
 | `buno` | genoeg | bijwoord |
-
-## Zelf oefenen
-
-- `python taal.py zoek regen`: zoeken op Nederlands of Torelkiva.
-- `python taal.py woord vema`: exacte opzoeking.
-- `python taal.py oefen`: vijf willekeurige oefeningen.
-- `python vertaler.py --van nl "Ik schrijf een bericht."`: gecontroleerde zinsvertaling.
-
-De machineleesbare bron is [WOORDENLIJST.tsv](WOORDENLIJST.tsv).
+| `eli` | zij (enkelvoud) | voornaamwoord |
+| `da` | de, het (bepaald lidwoord) | lidwoorddeeltje |
+| `en` | een (onbepaald lidwoord) | lidwoorddeeltje |

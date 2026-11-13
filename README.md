@@ -1,16 +1,16 @@
-# TORELKIVA 2.1 — kunsttaal, schrift en versleuteling
+# TORELKIVA 2.2 — kunsttaal, schrift en versleuteling
 
 > **Torelkiva — ontwikkeld op initiatief van Marco Beenen in samenwerking met ChatGPT (OpenAI), begonnen op 12 november 2026.**  
-> Versie **2.1** — openbare projecteditie; volledig lokaal bruikbaar op Windows en Linux.  
+> Versie **2.2** — openbare projecteditie; volledig lokaal bruikbaar op Windows en Linux.  
 > **Geen officiële OpenAI-goedkeuring, merkregistratie of onafhankelijke beveiligingsaudit.**
 
 **Torelkiva** is een fictieve, ontworpen kunsttaal met een originele woordenlijst, vaste basisgrammatica en een grafisch letterschrift. De optionele encryptietool is een apart programma: een geheim alfabet is geen cryptografie.
 
 **English:** *Torelkiva is a constructed language initiated by Marco Beenen and developed with the assistance of ChatGPT (OpenAI), starting 12 November 2026. It has its own vocabulary, grammar, visual writing system and a separate local encryption tool.*
 
-## Dit zit in versie 2.1
+## Dit zit in versie 2.2
 
-- **370 unieke woorden** in `WOORDENLIJST.tsv`; 149 oorspronkelijke woorden zijn behouden.
+- **373 unieke woorden** in `WOORDENLIJST.tsv`; 149 oorspronkelijke woorden zijn behouden.
 - Een gedocumenteerde **basisgrammatica**, controle van vervoegingen en een systematische uitspraakgids.
 - **Gecontroleerde vertaler** `vertaler.py`: Nederlands ↔ Torelkiva voor eenvoudige, ondersteunde zinsvormen. Geen vertaler voor willekeurige Nederlandse tekst; onbekende zinnen leveren een duidelijke foutmelding.
 - **Desktopprogramma met knoppen** `app.py`: vertalen, zoeken, Torel-schrift als SVG, en TK1-berichten versleutelen/ontsleutelen.
@@ -74,13 +74,23 @@ python -m unittest discover -s tests -v
 
 Kernregel: **onderwerp → voorwerp → tijd → ontkenning → werkwoord**. `-em` markeert het voorwerp, `-in` het meervoud, `na` het verleden en `sa` de toekomst. Zie [GRAMMATICA.md](GRAMMATICA.md).
 
-## Kwaliteitscontrole 2.1
+## Nieuwe onderscheidingen in 2.2
+
+- `Mi laviem lona.` = Ik lees **een** boek.
+- `Mi da laviem lona.` = Ik lees **het** boek.
+- `Mi en ravoem vara.` = Ik spreek **een** taal.
+- `Eli suri.` = **Zij slaapt.** / `Tira suri.` = **Zij slapen.**
+- `Mi eliem nela.` = Ik begrijp **haar**. / `Mi elaem nela.` = Ik begrijp **hem**.
+
+Dit lost meerdere betekenisverliezen op zonder bestaande TK1-berichten of oudere Torelkiva-zinnen te breken.
+
+## Kwaliteitscontrole 2.2
 
 Na een uitgebreidere toets zijn fouten in Nederlandse werkwoordplaatsing, adjectiefverbuiging en ongeldige ontkenningen hersteld. Ook weigert de vertaler bijvoeglijke naamwoorden bij voornaamwoorden en eigennamen. De automatische controle omvat **100.000 voorbeeldcombinaties** en een aparte regressiesuite; zie [VERIFICATIE.md](VERIFICATIE.md). Deze cijfers betekenen geen universele of onafhankelijke beveiligingscertificering.
 
 ## Belangrijke grenzen
 
-- Een woordenboek van 370 woorden is **geen volledige menselijke spreektaal**. De zinsvertaler ondersteunt een veel kleinere, expliciet vastgelegde deelverzameling; hij gebruikt niet elk woord uit de lijst automatisch.
+- Een woordenboek van 373 woorden is **geen volledige menselijke spreektaal**. De zinsvertaler ondersteunt een veel kleinere, expliciet vastgelegde deelverzameling; hij gebruikt niet elk woord uit de lijst automatisch.
 - Het schrift is een **letteromzetting**. Alleen de aparte encryptietool versleutelt berichten. Deze software is **niet onafhankelijk geaudit**: gebruik haar niet als enige beveiligingsmaatregel voor hooggevoelige informatie.
 - Er is **geen open-sourcelicentie** toegevoegd: GitHub-publicatie betekent niet automatisch dat alle rechten worden vrijgegeven.
 - Een GitHub-commit registreert publicatie en versies, maar is geen officiële merkregistratie of juridisch sluitend eigendomsbewijs.
@@ -89,17 +99,17 @@ Na een uitgebreidere toets zijn fouten in Nederlandse werkwoordplaatsing, adject
 
 - [LEESMIJ.md](LEESMIJ.md) — installatie en bediening
 - [GRAMMATICA.md](GRAMMATICA.md) — grammatica, getallen, zinsvormen
-- [WOORDENBOEK.md](WOORDENBOEK.md) — 370 woorden en hun betekenissen
+- [WOORDENBOEK.md](WOORDENBOEK.md) — 373 woorden en hun betekenissen
 - [OEFENBOEK.md](OEFENBOEK.md) — voorbeelden en opdrachten
 - [VERTALER.md](VERTALER.md) — wat de gecontroleerde vertaler precies ondersteunt
 - [VEILIGHEID.md](VEILIGHEID.md) — bedreigingsmodel en cryptografie
 - [HERKOMST.md](HERKOMST.md) — oorsprong van het project
 - [ONTWIKKELINGSVERKLARING.md](ONTWIKKELINGSVERKLARING.md) — particuliere verklaring
-- [Torelkiva_Handleiding_2_1.pdf](Torelkiva_Handleiding_2_1.pdf) — actuele Nederlandstalige PDF-handleiding
+- [Torelkiva_Handleiding_2_2.pdf](Torelkiva_Handleiding_2_2.pdf) — actuele Nederlandstalige PDF-handleiding
 - [VERIFICATIE.md](VERIFICATIE.md) — audit, testmethode en bekende grenzen
 - [CHANGELOG.md](CHANGELOG.md) — versiegeschiedenis
 - [CITATION.cff](CITATION.cff) — projectvermelding
 
 **Gemaakt om mee te spelen, te leren en verder te ontwikkelen.**
 
-**Actuele PDF:** `Torelkiva_Handleiding_2_1.pdf`. De oudere `Torelkiva_Handleiding_2_0.pdf` blijft in de openbare GitHub-repository beschikbaar als historische uitgave en wordt niet meegeleverd in het 2.1-ZIP-pakket.
+**Actuele PDF:** `Torelkiva_Handleiding_2_2.pdf`. De oudere `Torelkiva_Handleiding_2_0.pdf` blijft in de openbare GitHub-repository beschikbaar als historische uitgave en wordt niet meegeleverd in het 2.2-ZIP-pakket.

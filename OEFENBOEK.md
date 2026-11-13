@@ -1,4 +1,4 @@
-# Torelkiva — oefenboek 2.1
+# Torelkiva — oefenboek 2.2
 
 ## Les 1 — groeten en basiswoorden
 
@@ -53,3 +53,17 @@ Open `TOREL_ALFABET.svg` en probeer een zin met `python schrift.py`. De tekens z
 6. Wat betekent `ke?`? — *Ja/nee-vraag*.
 
 Extra oefenprogramma: `python taal.py oefen`.
+
+## Les 7 — nieuwe lidwoorddeeltjes en vrouwelijke enkelvoudsvorm (2.2)
+
+- `da` markeert een **bepaald** zelfstandig naamwoord (*de/het*).
+- `en` markeert een **onbepaald** zelfstandig naamwoord (*een*).
+- `eli` = zij (één vrouw), `eliem` = haar; `tira` = zij (meervoud).
+
+**Oefening:** vertaal *Ik lees het boek* → `Mi da laviem lona.`
+
+**Oefening:** vertaal *Ik spreek een taal* → `Mi en ravoem vara.`
+
+**Oefening:** vertaal *Zij slaapt* → `Eli suri.`
+
+Oude zinnen zonder `da`/`en` blijven grammaticaal geldig en gebruiken bij terugvertalen het oude standaardlidwoord.

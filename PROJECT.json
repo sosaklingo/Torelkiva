@@ -1,13 +1,13 @@
 {
   "name": "Torelkiva",
-  "version": "2.1",
+  "version": "2.2",
   "status": "documented core language and software release",
   "started": "2026-11-12",
   "published": "2026-11-13",
   "initiator": "Marco Beenen",
   "assistant": "ChatGPT (OpenAI)",
   "source": "https://github.com/sosaklingo/Torelkiva",
-  "dictionary_entries": 370,
+  "dictionary_entries": 373,
   "translator_scope": "controlled simple sentences only",
   "script_is_encryption": false,
   "encryption_format": "TK1",
@@ -15,5 +15,5 @@
   "trademark_registered": false,
   "openai_officially_endorsed": false,
   "license": "All rights reserved by applicable law; no explicit open-source license",
-  "release_note": "Kwaliteitscontrole: toekomstzinnen met voorwerpen, adjectieven, ontkenning en 100.000 roundtrips."
+  "release_note": "Lidwoorden da/en, nieuw vrouwelijk voornaamwoord eli, correctie dubbele zij, veiligheids- en regressietests."
 }

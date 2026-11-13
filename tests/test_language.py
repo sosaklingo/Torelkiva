@@ -10,7 +10,7 @@ from schrift import ALPHABET, paths, alphabet_svg, sentence_svg
 class LanguageTests(unittest.TestCase):
     def test_woordenboek_uniek(self):
         rows = woorden()
-        self.assertEqual(len(rows), 370)
+        self.assertEqual(len(rows), 373)
         self.assertEqual(len(rows), len({r['torelkiva'] for r in rows}))
     def test_oudste_kernwoorden_bewaard(self):
         for word in ['mi','ti','miva','tira','ela','vema','savo','ravo','sima','viro','luma','tora','nori','kavi','vara','nela','sila','kiri','fira','mero','lona','gala','dara','vo','sa','na','ke']:

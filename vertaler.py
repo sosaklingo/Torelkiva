@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Gecontroleerde zinsvertaler Nederlands <-> Torelkiva 2.1.
+"""Gecontroleerde zinsvertaler Nederlands <-> Torelkiva 2.2.
 
 Beperkt grammaticaal domein. Onbekende vormen geven een fout; de vertaler
 verzint nooit onbekende woorden of een schijnbaar correcte betekenis.
@@ -13,10 +13,10 @@ from taal import woorden
 class UnsupportedSentenceError(ValueError):
     """Zin valt buiten de gepubliceerde gecontroleerde grammatica."""
 
-SUBJECTS_NL = {'ik': 'mi', 'jij': 'ti', 'je': 'ti', 'wij': 'miva', 'we': 'miva', 'hij': 'ela', 'zij': 'tira'}
-SUBJECTS_TK = {'mi':'Ik', 'ti':'Jij', 'miva':'Wij', 'ela':'Hij', 'tira':'Zij'}
-OBJECTS_NL = {'mij':'mi', 'me':'mi', 'jou':'ti', 'je':'ti', 'ons':'miva', 'hem':'ela', 'haar':'ela', 'hen':'tira'}
-OBJECTS_TK = {'mi':'mij', 'ti':'jou', 'miva':'ons', 'ela':'hem', 'tira':'hen'}
+SUBJECTS_NL = {'ik': 'mi', 'jij': 'ti', 'je': 'ti', 'wij': 'miva', 'we': 'miva', 'hij': 'ela', 'zij': 'eli'}
+SUBJECTS_TK = {'mi':'Ik', 'ti':'Jij', 'miva':'Wij', 'ela':'Hij', 'eli':'Zij', 'tira':'Zij'}
+OBJECTS_NL = {'mij':'mi', 'me':'mi', 'jou':'ti', 'je':'ti', 'ons':'miva', 'hem':'ela', 'haar':'eli', 'hen':'tira'}
+OBJECTS_TK = {'mi':'mij', 'ti':'jou', 'miva':'ons', 'ela':'hem', 'eli':'haar', 'tira':'hen'}
 
 # infinitief, ik-vorm, jij-vorm, wij-vorm, verleden enkelvoud, verleden meervoud
 VERBS = {
@@ -54,7 +54,21 @@ VERBS = {
  'sira': ('luisteren','luister','luistert','luisteren','luisterde','luisterden'),
  'somo': ('horen','hoor','hoort','horen','hoorde','hoorden'),
 }
-PRON = {'mi':0, 'ti':1, 'miva':2, 'ela':1, 'tira':2}
+PRON = {'mi':0, 'ti':1, 'miva':2, 'ela':1, 'eli':1, 'tira':2}
+# Werkwoorden waarbij een direct voorwerp in de gecontroleerde Nederlandse
+# zinsbouw niet mogelijk is. Voorzetselvoorwerpen ('naar muziek luisteren')
+# zijn nog geen onderdeel van dit beperkte vertaalmodel.
+NO_DIRECT_OBJECT = frozenset({'gala','dara','hira','naki','dari','rano',
+                             'suri','dali','sira','tala','riva','sema'})
+
+
+def _check_valency(verb: str, obj: str | None) -> None:
+    if obj is not None and verb in NO_DIRECT_OBJECT:
+        raise UnsupportedSentenceError(
+            'Dit werkwoord kan in deze vertaler geen direct voorwerp hebben. '
+            'Een eventuele voorzetselconstructie is nog niet ondersteund.')
+
+
 # Veelgebruikte zelfstandige naamwoorden, met artikel voor een leesbare weergave.
 ARTICLES = {'viro':'een', 'meva':'een','ravo':'de','sima':'het','lavi':'een','luma':'een',
             'mora':'een','liri':'een','taro':'een','dova':'een', 'sona':'de',
@@ -67,6 +81,9 @@ NOUNS = {'bericht':'viro','taal':'ravo','geheim':'sima','boek':'lavi','woord':'m
 ADJS = {'nieuw':'nori','nieuwe':'nori','geheim':'sima','geheime':'sima','mooi':'mavi','mooie':'mavi',
         'goed':'kavi','goede':'kavi','groot':'vala','grote':'vala', 'klein':'niva','kleine':'niva',
         'veilig':'velo','veilige':'velo'}
+GENDER_ARTICLE = {'viro':'het','meva':'het','ravo':'de','sima':'het','lavi':'het',
+                  'luma':'de','mora':'het','liri':'het','taro':'de','dova':'de',
+                  'sona':'de','lovo':'de','pora':'het','tora':'de','nema':'de'}
 NL_NOUN = {value: key for key, value in NOUNS.items()}
 NL_NOUN['torelkiva']='Torelkiva'
 NL_ADJ = {'nori':'nieuw','sima':'geheim','mavi':'mooi','kavi':'goed','vala':'groot','niva':'klein','velo':'veilig'}
@@ -80,6 +97,7 @@ class Parsed:
     tense: str = ''
     negated: bool = False
     question: bool = False
+    article_token: str = ''  # leeg=2.1-weergave; da=de/het; en=een
 
 
 def _tokens(text: str) -> tuple[list[str], str]:
@@ -105,7 +123,7 @@ def parse_torel(text: str) -> Parsed:
     if question:
         words.pop()
     if not words or words[0] not in SUBJECTS_TK:
-        raise UnsupportedSentenceError('Begin met mi, ti, miva, ela of tira.')
+        raise UnsupportedSentenceError('Begin met mi, ti, miva, ela, eli of tira.')
     subject = words.pop(0)
     if not words or words[-1] not in VERBS:
         raise UnsupportedSentenceError('De zin moet eindigen op een bekend Torelkiva-werkwoord.')
@@ -119,6 +137,9 @@ def parse_torel(text: str) -> Parsed:
     if words and words[-1] == 'vo':
         raise UnsupportedSentenceError('Gebruik de vaste volgorde: ... na/sa vo werkwoord.')
     obj = adjective = None
+    article_token = ''
+    if words and words[0] in ('da','en'):
+        article_token = words.pop(0)
     if words:
         if len(words) > 2:
             raise UnsupportedSentenceError('Deze vertaler ondersteunt maximaal één bijvoeglijk naamwoord en één voorwerp.')
@@ -136,7 +157,10 @@ def parse_torel(text: str) -> Parsed:
                 raise UnsupportedSentenceError(f'Onbekend bijvoeglijk naamwoord: {adjective!r}.')
             if obj in OBJECTS_TK or obj == 'torelkiva':
                 raise UnsupportedSentenceError('Een bijvoeglijk naamwoord kan hier niet bij een voornaamwoord of eigennaam staan.')
-    return Parsed(subject, verb, obj, adjective, tense, negated, question or mark == '?')
+    if article_token and (not obj or obj in OBJECTS_TK or obj == 'torelkiva' or negated):
+        raise UnsupportedSentenceError('da/en mogen alleen vóór een niet-ontkend zelfstandig naamwoord staan.')
+    _check_valency(verb, obj)
+    return Parsed(subject, verb, obj, adjective, tense, negated, question or mark == '?', article_token)
 
 
 def to_nederlands(text: str) -> str:
@@ -154,7 +178,7 @@ def to_nederlands(text: str) -> str:
             obj = OBJECTS_TK[p.obj]
         else:
             noun = NL_NOUN[p.obj]
-            article = ARTICLES.get(p.obj,'een')
+            article = (GENDER_ARTICLE[p.obj] if p.article_token == 'da' else 'een' if p.article_token == 'en' else ARTICLES.get(p.obj,'een'))
             adj = NL_ADJ.get(p.adjective,'')
             if adj:
                 # Onbepaald het-woord: een nieuw boek, geen *nieuwe boek*.
@@ -181,7 +205,7 @@ def to_nederlands(text: str) -> str:
         finite = past_pl if i == 2 else past
         predicate = f'{finite} {obj} {neg_word}'.strip()
     else:
-        finite = ('wil' if p.subject=='ela' and p.verb=='laki' else (ik,jij,plural)[i])
+        finite = ('wil' if p.subject in ('ela','eli') and p.verb=='laki' else (ik,jij,plural)[i])
         predicate = f'{finite} {obj} {neg_word}'.strip()
     if p.question:
         # Nederlandse inversie: "Begrijp jij mij?", niet "Begrijpt jij mij?".
@@ -210,18 +234,34 @@ def parse_nederlands(text: str) -> Parsed:
     if words in (['hallo'], ['tot', 'ziens']):
         raise UnsupportedSentenceError('Groeten worden afzonderlijk verwerkt.')
     question = mark == '?'
+    singular_she = False
     if question:
         if len(words) < 2 or words[1] not in SUBJECTS_NL:
             raise UnsupportedSentenceError('Gebruik voor vragen bijvoorbeeld: "Begrijp jij mij?"')
         finite = words.pop(0)
-        subject = SUBJECTS_NL[words.pop(0)]
+        subject_word = words.pop(0)
+        subject = SUBJECTS_NL[subject_word]
     else:
         if words[0] not in SUBJECTS_NL:
-            raise UnsupportedSentenceError('Gebruik als onderwerp: ik, jij, hij of wij.')
-        subject = SUBJECTS_NL[words.pop(0)]
+            raise UnsupportedSentenceError('Gebruik als onderwerp: ik, jij, hij, zij of wij.')
+        subject_word = words.pop(0)
+        subject = SUBJECTS_NL[subject_word]
         if not words:
             raise UnsupportedSentenceError('Een zin heeft een werkwoord nodig.')
         finite = words.pop(0)
+    # Nederlandse 'zij' is enkelvoud of meervoud afhankelijk van de persoonsvorm.
+    # 'zij gaan' en 'zij zullen' zijn meervoud; 'zij gaat' en 'zij zal' enkelvoud.
+    if subject_word == 'zij':
+        plural_forms = {'zullen'} | {forms[3] for forms in VERBS.values()} | {forms[5] for forms in VERBS.values()}
+        singular_forms = {'zal','wil'} | {forms[2] for forms in VERBS.values()} | {forms[4] for forms in VERBS.values()}
+        if finite in plural_forms and finite not in singular_forms:
+            subject = 'tira'
+        elif finite in singular_forms and finite not in plural_forms:
+            subject = 'eli'
+        elif finite in plural_forms and finite in singular_forms:
+            raise UnsupportedSentenceError("'Zij' is hier dubbelzinnig. Gebruik voor een enkelvoudige vrouw 'zij zal' of een andere ondubbelzinnige persoonsvorm.")
+        else:
+            raise UnsupportedSentenceError('Onbekende of onjuiste persoonsvorm bij zij.')
 
     person = PRON[subject]
     future = finite in {'zal','zul','zult','zullen'}
@@ -246,7 +286,7 @@ def parse_nederlands(text: str) -> Parsed:
             if question and subject == 'ti':
                 present = forms[1]
             else:
-                present = 'wil' if code == 'laki' and subject == 'ela' else forms[1 + person]
+                present = 'wil' if code == 'laki' and subject in ('ela','eli') else forms[1 + person]
             past = forms[5] if person == 2 else forms[4]
             if finite == present:
                 matches.append((code, ''))
@@ -298,6 +338,8 @@ def parse_nederlands(text: str) -> Parsed:
             if attr not in ADJS:
                 raise UnsupportedSentenceError(f'Geen Torelkiva-bijvoeglijk naamwoord voor {attr!r}.')
             adjective = ADJS[attr]
+        if article in ('de','het') and obj not in OBJECTS_TK and obj != 'torelkiva' and article != GENDER_ARTICLE.get(obj):
+            raise UnsupportedSentenceError(f"Onjuist lidwoord: gebruik {GENDER_ARTICLE.get(obj)!r} in plaats van {article!r}.")
         if (article or no_article) and (obj in OBJECTS_TK or obj == 'torelkiva'):
             raise UnsupportedSentenceError('Gebruik geen lidwoord of geen bij een voornaamwoord of eigennaam.')
         if adjective and (obj in OBJECTS_TK or obj == 'torelkiva'):
@@ -312,6 +354,11 @@ def parse_nederlands(text: str) -> Parsed:
     elif article or no_article:
         raise UnsupportedSentenceError('Na een lidwoord of geen moet een voorwerp staan.')
 
+    if obj and obj not in OBJECTS_TK and obj != 'torelkiva' and not (article or no_article):
+        raise UnsupportedSentenceError(
+            'Gebruik bij zelfstandige naamwoorden de, het, een of geen. '
+            'Zonder lidwoord is deze eenvoudige Nederlandse zin niet ondersteund.')
+
     if negated and obj and obj not in OBJECTS_TK and obj != 'torelkiva':
         if not no_article:
             # In de gecontroleerde taal worden ontkende zelfstandige naamwoorden
@@ -319,7 +366,15 @@ def parse_nederlands(text: str) -> Parsed:
             raise UnsupportedSentenceError("Gebruik 'geen [voorwerp]' bij een ontkend zelfstandig naamwoord.")
     if no_article and not obj:
         raise UnsupportedSentenceError("'Geen' vereist een voorwerp.")
-    return Parsed(subject,verb,obj,adjective,tense,negated,question)
+    # 2.2: bewaar expliciete bepaaldheid wanneer die niet gelijk is aan de oude canon.
+    # Dit laat 2.1-zinnen zonder da/en volledig bruikbaar.
+    article_token = ''
+    if article and obj not in OBJECTS_TK and obj != 'torelkiva':
+        legacy = ARTICLES.get(obj, 'een')
+        if article != legacy:
+            article_token = 'en' if article == 'een' else 'da'
+    _check_valency(verb, obj)
+    return Parsed(subject,verb,obj,adjective,tense,negated,question,article_token)
 
 
 def to_torelkiva(text: str) -> str:
@@ -328,6 +383,7 @@ def to_torelkiva(text: str) -> str:
     if words == ['tot','ziens']:return 'Savo!'
     p=parse_nederlands(text)
     out=[p.subject]
+    if p.article_token: out.append(p.article_token)
     if p.adjective: out.append(p.adjective)
     if p.obj: out.append(p.obj+'em')
     if p.tense: out.append(p.tense)
@@ -338,7 +394,7 @@ def to_torelkiva(text: str) -> str:
 
 
 def main(argv: list[str]|None=None) -> int:
-    p=argparse.ArgumentParser(description='Gecontroleerde Torelkiva-zinsvertaler 2.1 (beperkt domein)')
+    p=argparse.ArgumentParser(description='Gecontroleerde Torelkiva-zinsvertaler 2.2 (beperkt domein)')
     p.add_argument('--van', choices=['nl','tk'], required=True)
     p.add_argument('zin', help='Vertaal één eenvoudige zin. Onbekende zinnen worden geweigerd.')
     args=p.parse_args(argv)

@@ -8,17 +8,17 @@ ROOT=Path(__file__).resolve().parents[1]
 class ReleaseTests(unittest.TestCase):
     def test_geldige_projectmetadata(self):
         meta=json.loads((ROOT/'PROJECT.json').read_text(encoding='utf-8'))
-        self.assertEqual(meta['version'],'2.1')
-        self.assertTrue((ROOT/'Torelkiva_Handleiding_2_1.pdf').read_bytes().startswith(b'%PDF-'))
-        self.assertIn('2.1', (ROOT/'offline.html').read_text(encoding='utf8')[:2000])
+        self.assertEqual(meta['version'],'2.2')
+        self.assertTrue((ROOT/'Torelkiva_Handleiding_2_2.pdf').read_bytes().startswith(b'%PDF-'))
+        self.assertIn('2.2', (ROOT/'offline.html').read_text(encoding='utf8')[:2000])
         self.assertEqual(meta['initiator'],'Marco Beenen')
         self.assertFalse(meta['security_audited'])
-        self.assertEqual(meta['dictionary_entries'],370)
+        self.assertEqual(meta['dictionary_entries'],373)
     def test_woordenboek_consistent(self):
         with (ROOT/'WOORDENLIJST.tsv').open(encoding='utf-8',newline='') as f:
             entries=list(csv.DictReader(f,delimiter='\t'))
-        self.assertEqual(len(entries),370)
-        self.assertEqual(len({x['torelkiva'] for x in entries}),370)
+        self.assertEqual(len(entries),373)
+        self.assertEqual(len({x['torelkiva'] for x in entries}),373)
         markdown=(ROOT/'WOORDENBOEK.md').read_text(encoding='utf-8')
         for entry in entries:
             self.assertIn(f"| `{entry['torelkiva']}` | {entry['nederlands']} | {entry['soort']} |", markdown)
@@ -30,7 +30,7 @@ class ReleaseTests(unittest.TestCase):
             self.assertIn('12 november 2026',data)
     def test_offline_data_inbegrepen(self):
         data=(ROOT/'offline.html').read_text(encoding='utf-8')
-        self.assertIn('370 woorden',data)
+        self.assertIn('373 woorden',data)
         self.assertIn('Marco Beenen',data)
         self.assertNotIn('<script src=',data)
         self.assertNotIn('fetch(',data)
@@ -47,7 +47,7 @@ class ReleaseTests(unittest.TestCase):
         tests=[(['vertaler.py','--van','nl','Ik begrijp jou niet.'],'Mi tiem vo nela.'),
                (['vertaler.py','--van','tk','Mi tiem vo nela.'],'Ik begrijp jou niet.'),
                (['taal.py','woord','vema'],'hallo'),
-               (['torelkiva.py','--versie'],'Torelkiva 2.1')]
+               (['torelkiva.py','--versie'],'Torelkiva 2.2')]
         for args,part in tests:
             with self.subTest(args=args):
                 p=subprocess.run([sys.executable,*args],cwd=ROOT,capture_output=True,text=True,timeout=20)

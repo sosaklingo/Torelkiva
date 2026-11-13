@@ -5,7 +5,7 @@ from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from vertaler import (to_torelkiva, to_nederlands, UnsupportedSentenceError,
-                      VERBS, SUBJECTS_TK)
+                      VERBS, SUBJECTS_TK, NO_DIRECT_OBJECT)
 from tools.build_release import FILES
 
 
@@ -58,7 +58,7 @@ class QualityTests(unittest.TestCase):
 
     def test_canonical_hij_hem_and_haar(self):
         self.assertEqual(to_nederlands('Mi elaem nela.'), 'Ik begrijp hem.')
-        self.assertEqual(to_torelkiva('Ik begrijp haar.'), 'Mi elaem nela.')
+        self.assertEqual(to_torelkiva('Ik begrijp haar.'), 'Mi eliem nela.')
         self.assertEqual(to_torelkiva('Ik begrijp hem.'), 'Mi elaem nela.')
 
     def test_verb_object_question_negation_roundtrips(self):
@@ -73,7 +73,11 @@ class QualityTests(unittest.TestCase):
                                       'ke' if question else ''] if x)
             text = text.capitalize() + ('?' if question else '.')
             with self.subTest(text=text):
-                self.assertEqual(to_torelkiva(to_nederlands(text)), text)
+                if verb in NO_DIRECT_OBJECT and obj:
+                    with self.assertRaises(UnsupportedSentenceError):
+                        to_nederlands(text)
+                else:
+                    self.assertEqual(to_torelkiva(to_nederlands(text)), text)
             count += 1
         self.assertEqual(count, len(SUBJECTS_TK)*len(VERBS)*len(objects)*3*2*2)
 

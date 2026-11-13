@@ -1,4 +1,4 @@
-# Torelkiva 2.1 — beveiliging en beperkingen
+# Torelkiva 2.2 — beveiliging en beperkingen
 
 ## Drie verschillende onderdelen
 

@@ -1,4 +1,4 @@
-# Onafhankelijk na te lopen kwaliteitscontrole — Torelkiva 2.1
+# Onafhankelijk na te lopen kwaliteitscontrole — Torelkiva 2.2
 
 **Oorsprong:** Marco Beenen in samenwerking met ChatGPT (OpenAI), begonnen op 12 november 2026.
 
@@ -13,11 +13,11 @@
 
 ## Afbakening en bekende beperkingen
 
-- Er zijn 370 woorden in het woordenboek, maar niet alle woorden kunnen vrij in alle grammaticale constructies worden vertaald.
+- Er zijn 373 woorden in het woordenboek, maar niet alle woorden kunnen vrij in alle grammaticale constructies worden vertaald.
 - Sommige informatie gaat verloren bij vertaling, vooral lidwoorden (*de, het, een*) en het genderneutrale `ela`. Daarom is een exacte Nederlands↔Torelkiva↔Nederlands-rondreis **niet altijd mogelijk**.
 - De app gebruikt Tkinter: niet bedoeld voor iOS of Android. Het bestand `offline.html` is wel een offline browserwoordenboek, zonder versleuteling.
 - Encryptie gebruikt `AES-256-GCM` en `scrypt` uit `cryptography`, maar het programma is **niet onafhankelijk geaudit**. Een lange, unieke, geheime wachtzin is cruciaal.
-- `Torelkiva_Handleiding_2_1.pdf` is de actuele Nederlandstalige handleiding. De oude `Torelkiva_Handleiding_2_0.pdf` blijft op GitHub beschikbaar als versiehistorie, maar zit niet in het ZIP-pakket met versie 2.1.
+- `Torelkiva_Handleiding_2_2.pdf` is de actuele Nederlandstalige handleiding. De oude `Torelkiva_Handleiding_2_0.pdf` blijft op GitHub beschikbaar als versiehistorie, maar zit niet in het ZIP-pakket met versie 2.2.
 - Er bestaat geen methode om wiskundig te garanderen dat deze toepassing of kunsttaal absoluut foutloos, volledig of onveranderlijk is.
 
 ## Zelf testen
@@ -30,3 +30,22 @@ python tools/build_release.py
 ```
 
 Het buildscript pakt alleen expliciet goedgekeurde bronbestanden in. Zet nooit persoonlijke sleutels, wachtzinnen of berichten in deze openbaar bedoelde projectmap.
+
+## Aanvullende toetsing 2.2
+
+- Behoud van betekenis bij onderscheid *de/het/een* binnen het gecontroleerde domein.
+- Onjuiste lidwoorden (*de boek*, *het vriend*) worden nu geweigerd.
+- `eli`/`eliem` toegevoegd voor *zij enkelvoud*/*haar*, naast de historische genderneutrale vorm.
+- Nieuwe testmodule `tests/test_meaning_preservation.py` toetst beide richtingen en oude compatibiliteit.
+- Controleer de werkelijke uitkomst van de GitHub-workflow vóór gebruik van het label *getest op GitHub*.
+
+## Controle 2.2
+
+- Onderscheid tussen `da` en `en` en oudere impliciete lidwoorden; terugvertaling van ondersteunde zinnen.
+- Onderscheid `eli` (vrouwelijk enkelvoud), `tira` (meervoud) en `ela` (historisch/genderneutraal, canoniek hij).
+- Foutieve combinaties als `de boek`, `ik lees boek`, `ik slaap een boek` en dubbele ontkenning worden afgewezen.
+- 12.960 geldige grammaticale varianten heen en terug getest, plus historische TK1-ciphertekstvector.
+- SHA-256-manifest sluit zichzelf uit om een oneindige controlesomkring te vermijden.
+- Offline browserwoordenboek gebruikt geen externe netwerkcalls.
+
+Een geslaagde testserie is geen onafhankelijke beveiligingsaudit en geen garantie dat alle natuurlijke taal vertaald kan worden.

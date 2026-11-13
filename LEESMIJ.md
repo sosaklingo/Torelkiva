@@ -1,4 +1,4 @@
-# Torelkiva 2.1 — installeren en gebruiken
+# Torelkiva 2.2 — installeren en gebruiken
 
 ## Benodigdheden
 
@@ -15,7 +15,7 @@ Windows: dubbelklik op `START_WINDOWS.bat` of voer `py -3 app.py` uit. Linux: `b
 python app.py
 ```
 
-Het desktopprogramma bevat tabs **Vertalen**, **Woordenboek**, **Torel-schrift** en **Versleutelen**. Een wachtzin wordt niet in een bestand opgeslagen.
+Het desktopprogramma bevat tabs **Vertalen**, **Woordenboek**, **Torel-schrift** en **Versleutelen**. Een wachtzin wordt niet in een bestand opgeslagen. Voor versleutelen vraagt de desktopapp de wachtzin tweemaal; een fout ingevoerde wachtzin kan een bericht namelijk onherstelbaar maken.
 
 ## 2. Op een iPhone of andere telefoon
 
@@ -76,6 +76,6 @@ python -m unittest discover -s tests -v
 
 Zie `VEILIGHEID.md` voor de beperkingen en waarschuwingen.
 
-## Nieuwe PDF-handleiding (versie 2.1)
+## Nieuwe PDF-handleiding (versie 2.2)
 
-Open `Torelkiva_Handleiding_2_1.pdf` voor de actuele Nederlandstalige gids. De PDF met versie 2.0 blijft alleen beschikbaar als historische uitgave.
+Open `Torelkiva_Handleiding_2_2.pdf` voor de actuele Nederlandstalige gids. De PDF met versie 2.1 blijft als historische uitgave beschikbaar.

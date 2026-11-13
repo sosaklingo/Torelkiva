@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Torelkiva 2.1: zoek in het officiële woordenboek en oefen met voorbeelden.
+"""Torelkiva 2.2: zoek in het officiële woordenboek en oefen met voorbeelden.
 
 Dit is een woordenboekhulp, geen automatische vertaler van complete zinnen.
 """
@@ -52,7 +52,7 @@ def vind(term: str, exact: bool = False) -> list[dict[str, str]]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description='Torelkiva 2.1 — woordenboek en oefenhulp (geen automatische vertaler)')
+    parser = argparse.ArgumentParser(description='Torelkiva 2.2 — woordenboek en oefenhulp (geen automatische vertaler)')
     parser.add_argument('--versie', action='version', version='Torelkiva taalhulp 1.2')
     sub = parser.add_subparsers(dest='opdracht', required=True)
     for name in ('zoek', 'woord'):

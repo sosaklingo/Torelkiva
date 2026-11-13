@@ -18,7 +18,7 @@ ACCENT = '#2755b6'
 class TorelkivaApp(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title('Torelkiva 2.1 — Marco Beenen × ChatGPT')
+        self.title('Torelkiva 2.2 — Marco Beenen × ChatGPT')
         self.geometry('890x680')
         self.minsize(710, 540)
         self.configure(bg=BACKGROUND)
@@ -32,7 +32,7 @@ class TorelkivaApp(tk.Tk):
 
         header = ttk.Frame(self, padding=(18, 14))
         header.pack(fill='x')
-        ttk.Label(header, text='TORELKIVA 2.1', style='Head.TLabel').pack(anchor='w')
+        ttk.Label(header, text='TORELKIVA 2.2', style='Head.TLabel').pack(anchor='w')
         ttk.Label(header, text='Taal, eigen schrift en lokale versleuteling • begonnen op 12 november 2026').pack(anchor='w')
         self.tabs = ttk.Notebook(self)
         self.tabs.pack(fill='both', expand=True, padx=18, pady=(4, 10))

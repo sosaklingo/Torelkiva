@@ -1,3 +1,14 @@
+# Torelkiva 2.2 — betekenisbehoud en foutdetectie (13 november 2026)
+
+- Nieuwe optionele lidwoorddeeltjes `da` (de/het) en `en` (een), zonder de basiszinnen te wijzigen.
+- Nederlands krijgt foutdetectie voor verkeerde lidwoorden, zoals *de boek*.
+- `eli` = zij (enkelvoud), `eliem` = haar; oude `ela` en `tira` blijven intact.
+- Het onderscheid *zij slaapt* versus *zij slapen* werkt nu via Nederlandse persoonsvorm.
+- Woordenboek uitgebreid van 370 tot 373 lemmas, inclusief de nieuwe grammaticale deeltjes.
+- Extra regressietests voor vertaalrondreizen en historische compatibiliteit.
+- Valentiecontrole: werkwoorden zoals slapen, gaan en luisteren kunnen in het beperkte vertaalmodel geen direct voorwerp meer krijgen.
+- Eerdere TK1-encryptie blijft byte-for-byte compatibel.
+
 # Versie 2.1 — kwaliteitsupdate (13 november 2026)
 
 - Toekomstige Nederlandse zinnen met een voorwerp worden nu correct herkend: *Ik zal een boek lezen* ↔ `Mi laviem sa lona.`
