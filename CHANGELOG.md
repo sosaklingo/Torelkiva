@@ -1,3 +1,13 @@
+# Versie 2.1 — kwaliteitsupdate (13 november 2026)
+
+- Toekomstige Nederlandse zinnen met een voorwerp worden nu correct herkend: *Ik zal een boek lezen* ↔ `Mi laviem sa lona.`
+- Correcte Nederlandse adjectiefspelling (*grote* in plaats van *groote*), ook na *geen*.
+- Foutieve dubbele ontkenning (*niet geen*), dubbele lidwoorden en onlogische bijvoeglijke woorden bij voornaamwoorden worden afgewezen.
+- `elaem` gebruikt voortaan de canonieke Nederlandse objectvorm *hem*; *haar* wordt ook als invoer ondersteund.
+- 100.000 representatieve zinscombinaties gecontroleerd; nieuwe vaste tests toegevoegd.
+- Releasebuilder gebruikt een expliciete lijst met bronbestanden om onbedoeld meesturen van privébestanden te voorkomen.
+- Oud `TK1:`-encryptieformaat blijft ongewijzigd.
+
 # Wijzigingen — Torelkiva
 
 ## 2.0 — 13 november 2026

@@ -10,7 +10,7 @@ if %errorlevel%==0 (
 :menu
 cls
 echo =======================================
-echo        TORELKIVA 2.0
+echo        TORELKIVA 2.1
 echo =======================================
 echo 1. Open grafisch programma
  echo 2. Vertaal een Nederlandse zin

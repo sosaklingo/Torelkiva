@@ -1,4 +1,4 @@
-# Torelkiva — normatieve basisgrammatica 2.0
+# Torelkiva — normatieve basisgrammatica 2.1
 
 **Start:** 12 november 2026. **Initiatiefnemer:** Marco Beenen; uitgewerkt met ChatGPT (OpenAI).
 
@@ -70,13 +70,13 @@ Het werkwoord wordt niet vervoegd naar persoon of meervoud. Er zijn geen lidwoor
 | 90 | nova-desa |
 | 99 | nova-desa-nova |
 
-Het koppelteken maakt één telwoord van meerdere delen. Er bestaan in versie 2.0 **geen officiële vormen boven 99**. Getallen worden vóór een naamwoord geplaatst: `duna lumain` = twee vrienden. De vertaler herkent getallen nog niet in zinnen.
+Het koppelteken maakt één telwoord van meerdere delen. Er bestaan in versie 2.1 **geen officiële vormen boven 99**. Getallen worden vóór een naamwoord geplaatst: `duna lumain` = twee vrienden. De vertaler herkent getallen nog niet in zinnen.
 
 ## 7. Meerdere zinnen, voegwoorden en grenzen
 
 `e` = en, `o` = of, `ba` = maar. Hiermee kun je eenvoudige woordgroepen naast elkaar zetten, bijvoorbeeld `mi e ti` = ik en jij. De automatische vertaler ondersteunt **geen** zinnen met meer dan één persoonsvorm, bijzinnen, passieve vormen, samengestelde tijden, uitgebreide betrekkelijke voornaamwoorden of vrij gevormde vraagzinnen.
 
-## 8. Vertaaldomein 2.0
+## 8. Vertaaldomein 2.1
 
 De vertaler in `vertaler.py` accepteert:
 

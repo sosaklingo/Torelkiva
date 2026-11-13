@@ -8,7 +8,9 @@ ROOT=Path(__file__).resolve().parents[1]
 class ReleaseTests(unittest.TestCase):
     def test_geldige_projectmetadata(self):
         meta=json.loads((ROOT/'PROJECT.json').read_text(encoding='utf-8'))
-        self.assertEqual(meta['version'],'2.0')
+        self.assertEqual(meta['version'],'2.1')
+        self.assertTrue((ROOT/'Torelkiva_Handleiding_2_1.pdf').read_bytes().startswith(b'%PDF-'))
+        self.assertIn('2.1', (ROOT/'offline.html').read_text(encoding='utf8')[:2000])
         self.assertEqual(meta['initiator'],'Marco Beenen')
         self.assertFalse(meta['security_audited'])
         self.assertEqual(meta['dictionary_entries'],370)
@@ -45,7 +47,7 @@ class ReleaseTests(unittest.TestCase):
         tests=[(['vertaler.py','--van','nl','Ik begrijp jou niet.'],'Mi tiem vo nela.'),
                (['vertaler.py','--van','tk','Mi tiem vo nela.'],'Ik begrijp jou niet.'),
                (['taal.py','woord','vema'],'hallo'),
-               (['torelkiva.py','--versie'],'Torelkiva 2.0')]
+               (['torelkiva.py','--versie'],'Torelkiva 2.1')]
         for args,part in tests:
             with self.subTest(args=args):
                 p=subprocess.run([sys.executable,*args],cwd=ROOT,capture_output=True,text=True,timeout=20)

@@ -1,14 +1,14 @@
-# TORELKIVA 2.0 — kunsttaal, schrift en versleuteling
+# TORELKIVA 2.1 — kunsttaal, schrift en versleuteling
 
 > **Torelkiva — ontwikkeld op initiatief van Marco Beenen in samenwerking met ChatGPT (OpenAI), begonnen op 12 november 2026.**  
-> Versie **2.0** — openbare projecteditie; volledig lokaal bruikbaar op Windows en Linux.  
+> Versie **2.1** — openbare projecteditie; volledig lokaal bruikbaar op Windows en Linux.  
 > **Geen officiële OpenAI-goedkeuring, merkregistratie of onafhankelijke beveiligingsaudit.**
 
 **Torelkiva** is een fictieve, ontworpen kunsttaal met een originele woordenlijst, vaste basisgrammatica en een grafisch letterschrift. De optionele encryptietool is een apart programma: een geheim alfabet is geen cryptografie.
 
 **English:** *Torelkiva is a constructed language initiated by Marco Beenen and developed with the assistance of ChatGPT (OpenAI), starting 12 November 2026. It has its own vocabulary, grammar, visual writing system and a separate local encryption tool.*
 
-## Dit zit in versie 2.0
+## Dit zit in versie 2.1
 
 - **370 unieke woorden** in `WOORDENLIJST.tsv`; 149 oorspronkelijke woorden zijn behouden.
 - Een gedocumenteerde **basisgrammatica**, controle van vervoegingen en een systematische uitspraakgids.
@@ -74,6 +74,10 @@ python -m unittest discover -s tests -v
 
 Kernregel: **onderwerp → voorwerp → tijd → ontkenning → werkwoord**. `-em` markeert het voorwerp, `-in` het meervoud, `na` het verleden en `sa` de toekomst. Zie [GRAMMATICA.md](GRAMMATICA.md).
 
+## Kwaliteitscontrole 2.1
+
+Na een uitgebreidere toets zijn fouten in Nederlandse werkwoordplaatsing, adjectiefverbuiging en ongeldige ontkenningen hersteld. Ook weigert de vertaler bijvoeglijke naamwoorden bij voornaamwoorden en eigennamen. De automatische controle omvat **100.000 voorbeeldcombinaties** en een aparte regressiesuite; zie [VERIFICATIE.md](VERIFICATIE.md). Deze cijfers betekenen geen universele of onafhankelijke beveiligingscertificering.
+
 ## Belangrijke grenzen
 
 - Een woordenboek van 370 woorden is **geen volledige menselijke spreektaal**. De zinsvertaler ondersteunt een veel kleinere, expliciet vastgelegde deelverzameling; hij gebruikt niet elk woord uit de lijst automatisch.
@@ -91,7 +95,11 @@ Kernregel: **onderwerp → voorwerp → tijd → ontkenning → werkwoord**. `-e
 - [VEILIGHEID.md](VEILIGHEID.md) — bedreigingsmodel en cryptografie
 - [HERKOMST.md](HERKOMST.md) — oorsprong van het project
 - [ONTWIKKELINGSVERKLARING.md](ONTWIKKELINGSVERKLARING.md) — particuliere verklaring
+- [Torelkiva_Handleiding_2_1.pdf](Torelkiva_Handleiding_2_1.pdf) — actuele Nederlandstalige PDF-handleiding
+- [VERIFICATIE.md](VERIFICATIE.md) — audit, testmethode en bekende grenzen
 - [CHANGELOG.md](CHANGELOG.md) — versiegeschiedenis
 - [CITATION.cff](CITATION.cff) — projectvermelding
 
 **Gemaakt om mee te spelen, te leren en verder te ontwikkelen.**
+
+**Actuele PDF:** `Torelkiva_Handleiding_2_1.pdf`. De oudere `Torelkiva_Handleiding_2_0.pdf` blijft beschikbaar als historische uitgave.

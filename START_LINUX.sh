@@ -6,7 +6,7 @@ if ! command -v python3 >/dev/null 2>&1; then
   exit 1
 fi
 while true; do
-  printf '\n===== TORELKIVA 2.0 =====\n1. Open grafisch programma\n2. Vertaal een Nederlandse zin\n3. Zoek een woord\n4. Oefen Torelkiva\n5. Versleutel bericht\n6. Ontsleutel bericht\n7. Bekijk Torel-alfabet\n8. Afsluiten\n'
+  printf '\n===== TORELKIVA 2.1 =====\n1. Open grafisch programma\n2. Vertaal een Nederlandse zin\n3. Zoek een woord\n4. Oefen Torelkiva\n5. Versleutel bericht\n6. Ontsleutel bericht\n7. Bekijk Torel-alfabet\n8. Afsluiten\n'
   read -r -p 'Kies een optie (1-8): ' keuze || exit 0
   case "$keuze" in
     1) python3 app.py ;;

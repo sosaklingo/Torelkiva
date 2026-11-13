@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Torelkiva 2.0: berichten en (kleine) bestanden versleutelen.
+"""Torelkiva 2.1: berichten en (kleine) bestanden versleutelen.
 
 Beveiliging: scrypt (N=2^15, r=8, p=1) + AES-256-GCM met een verse
 willekeurige salt en nonce per bericht. Vereist: cryptography.
@@ -107,8 +107,8 @@ def _save_new(path: Path, data: bytes) -> None:
 
 
 def run() -> int:
-    parser = argparse.ArgumentParser(description="Torelkiva 2.0 – versleutel en ontsleutel berichten of bestanden")
-    parser.add_argument("--versie", action="version", version="Torelkiva 2.0 (bestandsformaat TK1)")
+    parser = argparse.ArgumentParser(description="Torelkiva 2.1 – versleutel en ontsleutel berichten of bestanden")
+    parser.add_argument("--versie", action="version", version="Torelkiva 2.1 (bestandsformaat TK1)")
     parser.add_argument("actie", choices=["versleutel", "ontsleutel"], help="Kies je actie")
     parser.add_argument("--bestand", type=Path, help="Optioneel: werk met een tekstbestand of ander klein bestand")
     parser.add_argument("--stdin", action="store_true", help="Lees tekst/een TK1-code van standaardinvoer (ondersteunt meerdere regels)")

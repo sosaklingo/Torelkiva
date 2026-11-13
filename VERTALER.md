@@ -1,4 +1,4 @@
-# Gecontroleerde vertaler — specificatie 2.0
+# Gecontroleerde vertaler — specificatie 2.1
 
 ## Waarom niet elke Nederlandse zin?
 
@@ -34,3 +34,11 @@ Torelkiva gebruikt geen de/het/een. Bijvoorbeeld: *het bericht* en *een bericht*
 - `UnsupportedSentenceError` bij niet-ondersteunde invoer.
 
 De code gebruikt alleen de standaardbibliotheek en werkt volledig offline.
+
+## Correcties in versie 2.1
+
+- Nederlandse toekomende tijd gebruikt het werkwoord aan het einde: `Ik zal een boek lezen.` ↔ `Mi laviem sa lona.`
+- Vorm `groot` krijgt waar nodig `grote` (nooit `groote`).
+- De gecontroleerde vertaler weigert dubbele ontkenningen en onlogische modifiers.
+- `ela` is genderneutraal, maar de Nederlandse terugvertaler kiest canoniek `hij` of `hem`. Daardoor kan informatie over geslacht en artikelgebruik verloren gaan.
+- De vertaler geeft **geen garantie van betekenisbehoud bij alle Nederlandse zinnen**, onder meer vanwege ontbrekende lidwoorden in Torelkiva.

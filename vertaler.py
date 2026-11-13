@@ -338,7 +338,7 @@ def to_torelkiva(text: str) -> str:
 
 
 def main(argv: list[str]|None=None) -> int:
-    p=argparse.ArgumentParser(description='Gecontroleerde Torelkiva-zinsvertaler 2.0 (beperkt domein)')
+    p=argparse.ArgumentParser(description='Gecontroleerde Torelkiva-zinsvertaler 2.1 (beperkt domein)')
     p.add_argument('--van', choices=['nl','tk'], required=True)
     p.add_argument('zin', help='Vertaal één eenvoudige zin. Onbekende zinnen worden geweigerd.')
     args=p.parse_args(argv)

@@ -1,4 +1,4 @@
-# Torelkiva 2.0 — woordenboek
+# Torelkiva 2.1 — woordenboek
 
 Ontwikkeld op initiatief van **Marco Beenen** in samenwerking met ChatGPT (OpenAI), gestart op **12 november 2026**.
 

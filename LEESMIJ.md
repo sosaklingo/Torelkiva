@@ -1,4 +1,4 @@
-# Torelkiva 2.0 — installeren en gebruiken
+# Torelkiva 2.1 — installeren en gebruiken
 
 ## Benodigdheden
 
@@ -75,3 +75,7 @@ python -m unittest discover -s tests -v
 - `File exists`: de tool beschermt bestaande uitvoerbestanden tegen overschrijven.
 
 Zie `VEILIGHEID.md` voor de beperkingen en waarschuwingen.
+
+## Nieuwe PDF-handleiding (versie 2.1)
+
+Open `Torelkiva_Handleiding_2_1.pdf` voor de actuele Nederlandstalige gids. De PDF met versie 2.0 blijft alleen beschikbaar als historische uitgave.
