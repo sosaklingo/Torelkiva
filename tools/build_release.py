@@ -10,7 +10,7 @@ from pathlib import Path
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT.parent / 'Torelkiva_2_1_compleet.zip'
+OUT = ROOT.parent / 'Torelkiva_2_1_definitief.zip'
 MANIFEST = ROOT / 'SHA256SUMS.txt'
 FILES = (
     '.github/workflows/tests.yml', '.gitignore', 'CHANGELOG.md', 'CITATION.cff',
@@ -18,7 +18,7 @@ FILES = (
     'OEFENBOEK.md', 'ONTWIKKELINGSVERKLARING.md', 'ONTWIKKELINGSVERKLARING.pdf',
     'PROJECT.json', 'PUBLICEREN_OP_GITHUB.md', 'README.md',
     'START_LINUX.sh', 'START_WINDOWS.bat', 'TOREL_ALFABET.svg',
-    'Torelkiva_Handleiding_2_0.pdf', 'Torelkiva_Handleiding_2_1.pdf', 'VEILIGHEID.md', 'VERTALER.md',
+    'Torelkiva_Handleiding_2_1.pdf', 'VEILIGHEID.md', 'VERTALER.md',
     'VERIFICATIE.md', 'VOORBEELD_TOREL.svg', 'WOORDENBOEK.md', 'WOORDENLIJST.tsv',
     'app.py', 'assets/Torel_alfabet_preview.png', 'offline.html', 'requirements.txt',
     'schrift.py', 'taal.py', 'tests/test_crypto.py', 'tests/test_crypto_extra.py',

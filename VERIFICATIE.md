@@ -17,7 +17,7 @@
 - Sommige informatie gaat verloren bij vertaling, vooral lidwoorden (*de, het, een*) en het genderneutrale `ela`. Daarom is een exacte Nederlands↔Torelkiva↔Nederlands-rondreis **niet altijd mogelijk**.
 - De app gebruikt Tkinter: niet bedoeld voor iOS of Android. Het bestand `offline.html` is wel een offline browserwoordenboek, zonder versleuteling.
 - Encryptie gebruikt `AES-256-GCM` en `scrypt` uit `cryptography`, maar het programma is **niet onafhankelijk geaudit**. Een lange, unieke, geheime wachtzin is cruciaal.
-- `Torelkiva_Handleiding_2_1.pdf` is de actuele Nederlandstalige handleiding. De oude `Torelkiva_Handleiding_2_0.pdf` blijft beschikbaar als versiehistorie.
+- `Torelkiva_Handleiding_2_1.pdf` is de actuele Nederlandstalige handleiding. De oude `Torelkiva_Handleiding_2_0.pdf` blijft op GitHub beschikbaar als versiehistorie, maar zit niet in het ZIP-pakket met versie 2.1.
 - Er bestaat geen methode om wiskundig te garanderen dat deze toepassing of kunsttaal absoluut foutloos, volledig of onveranderlijk is.
 
 ## Zelf testen

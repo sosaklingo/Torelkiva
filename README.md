@@ -102,4 +102,4 @@ Na een uitgebreidere toets zijn fouten in Nederlandse werkwoordplaatsing, adject
 
 **Gemaakt om mee te spelen, te leren en verder te ontwikkelen.**
 
-**Actuele PDF:** `Torelkiva_Handleiding_2_1.pdf`. De oudere `Torelkiva_Handleiding_2_0.pdf` blijft beschikbaar als historische uitgave.
+**Actuele PDF:** `Torelkiva_Handleiding_2_1.pdf`. De oudere `Torelkiva_Handleiding_2_0.pdf` blijft in de openbare GitHub-repository beschikbaar als historische uitgave en wordt niet meegeleverd in het 2.1-ZIP-pakket.
