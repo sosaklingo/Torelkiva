@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Gecontroleerde zinsvertaler Nederlands <-> Torelkiva 2.0.
+"""Gecontroleerde zinsvertaler Nederlands <-> Torelkiva 2.1.
 
 Beperkt grammaticaal domein. Onbekende vormen geven een fout; de vertaler
 verzint nooit onbekende woorden of een schijnbaar correcte betekenis.
@@ -15,8 +15,8 @@ class UnsupportedSentenceError(ValueError):
 
 SUBJECTS_NL = {'ik': 'mi', 'jij': 'ti', 'je': 'ti', 'wij': 'miva', 'we': 'miva', 'hij': 'ela', 'zij': 'tira'}
 SUBJECTS_TK = {'mi':'Ik', 'ti':'Jij', 'miva':'Wij', 'ela':'Hij', 'tira':'Zij'}
-OBJECTS_NL = {'mij':'mi', 'me':'mi', 'jou':'ti', 'je':'ti', 'ons':'miva', 'hem':'ela', 'hen':'tira'}
-OBJECTS_TK = {'mi':'mij', 'ti':'jou', 'miva':'ons', 'ela':'hem/haar', 'tira':'hen'}
+OBJECTS_NL = {'mij':'mi', 'me':'mi', 'jou':'ti', 'je':'ti', 'ons':'miva', 'hem':'ela', 'haar':'ela', 'hen':'tira'}
+OBJECTS_TK = {'mi':'mij', 'ti':'jou', 'miva':'ons', 'ela':'hem', 'tira':'hen'}
 
 # infinitief, ik-vorm, jij-vorm, wij-vorm, verleden enkelvoud, verleden meervoud
 VERBS = {
@@ -134,6 +134,8 @@ def parse_torel(text: str) -> Parsed:
             adjective = words.pop()
             if adjective not in NL_ADJ:
                 raise UnsupportedSentenceError(f'Onbekend bijvoeglijk naamwoord: {adjective!r}.')
+            if obj in OBJECTS_TK or obj == 'torelkiva':
+                raise UnsupportedSentenceError('Een bijvoeglijk naamwoord kan hier niet bij een voornaamwoord of eigennaam staan.')
     return Parsed(subject, verb, obj, adjective, tense, negated, question or mark == '?')
 
 
@@ -157,8 +159,11 @@ def to_nederlands(text: str) -> str:
             if adj:
                 # Onbepaald het-woord: een nieuw boek, geen *nieuwe boek*.
                 het_woorden = {'viro','sima','lavi','meva','mora','liri','pora'}
-                needs_e = article in ('de', 'het') or (article == 'een' and p.obj not in het_woorden)
-                if needs_e and not adj.endswith('e'): adj += 'e'
+                effective_article = 'een' if p.negated else article
+                needs_e = effective_article in ('de', 'het') or (effective_article == 'een' and p.obj not in het_woorden)
+                if needs_e:
+                    # Groot -> grote, niet 'groote'; spelling is geen simpele -e bij alle stammen.
+                    adj = {'groot': 'grote'}.get(adj, adj if adj.endswith('e') else adj+'e')
                 obj = f'{article} {adj} {noun}'
             else:
                 obj = f'{article} {noun}' if p.obj!='torelkiva' else 'Torelkiva'
@@ -194,95 +199,126 @@ def to_nederlands(text: str) -> str:
 
 
 def parse_nederlands(text: str) -> Parsed:
+    """Herken alleen de gedocumenteerde, gecontroleerde zinsbouw.
+
+    Volgorde: [persoonsvorm] onderwerp [geen/een/de/het + adj + object]
+              [niet] [infinitief bij toekomst].
+    Leid geen vertaling af van een zin met tegengestelde ontkenningen of
+    een bijvoeglijk naamwoord bij een voornaamwoord.
+    """
     words, mark = _tokens(text)
-    if words in (['hallo'],['tot','ziens']):
+    if words in (['hallo'], ['tot', 'ziens']):
         raise UnsupportedSentenceError('Groeten worden afzonderlijk verwerkt.')
     question = mark == '?'
     if question:
-        # Nederlandse inversie. Bij 'jij' vervalt de -t in het heden.
-        if len(words)<2 or words[1] not in SUBJECTS_NL:
+        if len(words) < 2 or words[1] not in SUBJECTS_NL:
             raise UnsupportedSentenceError('Gebruik voor vragen bijvoorbeeld: "Begrijp jij mij?"')
-        verb_word=words.pop(0)
-        subject=SUBJECTS_NL[words.pop(0)]
-        if verb_word in ('zal','zul','zullen'):
-            expected = 'zullen' if subject in ('miva','tira') else ('zul' if subject=='ti' else 'zal')
-            if verb_word != expected or not words:
-                raise UnsupportedSentenceError('Gebruik de correcte toekomstige vraagvorm.')
-            inf=words.pop()
-            matches=[k for k,v in VERBS.items() if inf==v[0]]
-            if len(matches)!=1:
-                raise UnsupportedSentenceError('Toekomstig werkwoord is onbekend.')
-            verb=matches[0];tense='sa'
-        else:
-            matching=[]
-            i=PRON[subject]
-            for code, forms in VERBS.items():
-                present = ('wil' if subject=='ela' and code=='laki' else (forms[1] if subject=='ti' else forms[1+i]))
-                if verb_word==present:
-                    matching.append((code,''))
-                past_form=forms[5] if i==2 else forms[4]
-                if verb_word==past_form:
-                    matching.append((code,'na'))
-            matching=list(set(matching))
-            if len(matching)!=1:
-                raise UnsupportedSentenceError('Werkwoord van deze vraag niet eenduidig.')
-            verb,tense=matching[0]
+        finite = words.pop(0)
+        subject = SUBJECTS_NL[words.pop(0)]
     else:
         if words[0] not in SUBJECTS_NL:
             raise UnsupportedSentenceError('Gebruik als onderwerp: ik, jij, hij of wij.')
-        subject=SUBJECTS_NL[words.pop(0)]
-        if not words: raise UnsupportedSentenceError('Een zin heeft een werkwoord nodig.')
-        verb_word=words.pop(0)
-        tense='sa' if verb_word in ('zal','zult','zullen') else ''
-        if tense:
-            expected_future='zullen' if subject in ('miva','tira') else ('zult' if subject=='ti' else 'zal')
-            if verb_word != expected_future:
-                raise UnsupportedSentenceError('Gebruik de correcte vorm: zal, zult of zullen.')
-            if not words: raise UnsupportedSentenceError('Een toekomstige zin heeft een infinitief nodig.')
-            verb_word=words.pop()
-        matching = []
+        subject = SUBJECTS_NL[words.pop(0)]
+        if not words:
+            raise UnsupportedSentenceError('Een zin heeft een werkwoord nodig.')
+        finite = words.pop(0)
+
+    person = PRON[subject]
+    future = finite in {'zal','zul','zult','zullen'}
+    if future:
+        if question:
+            expected = 'zullen' if person==2 else ('zul' if subject=='ti' else 'zal')
+        else:
+            expected = 'zullen' if person==2 else ('zult' if subject=='ti' else 'zal')
+        if finite != expected:
+            raise UnsupportedSentenceError('Gebruik de correcte toekomstige persoonsvorm.')
+        if not words:
+            raise UnsupportedSentenceError('Een toekomstige zin heeft een infinitief nodig.')
+        infinitive = words.pop()  # Het hele werkwoord staat aan het einde: ik zal een boek lezen.
+        matches = [code for code, forms in VERBS.items() if forms[0] == infinitive]
+        if len(matches) != 1:
+            raise UnsupportedSentenceError('Onbekend toekomstig werkwoord.')
+        verb, tense = matches[0], 'sa'
+    else:
+        matches = []
         for code, forms in VERBS.items():
-            if tense=='sa' and verb_word==forms[0]: matching.append((code,'sa'))
-            if tense!='sa':
-                for form, t in [(forms[1],''),(forms[2],''),(forms[3],''),(forms[4],'na'),(forms[5],'na')]:
-                    if verb_word==form:matching.append((code,t))
-        matching = list(set(matching))
-        i = PRON[subject]
-        # 'Ik schrijft' en 'wij loopt' mogen niet stilzwijgend worden vertaald.
-        matching = [(code,t) for code,t in matching if (
-            (tense == 'sa' and verb_word == VERBS[code][0]) or
-            (tense != 'sa' and verb_word == (
-                 VERBS[code][5 if i == 2 else 4] if t == 'na'
-                 else ('wil' if subject=='ela' and code=='laki' else VERBS[code][1+i])
-            ))
-        )]
-        if len(matching)!=1:
+            # Nederlandse inversie bij jij: "Begrijp jij", niet "Begrijpt jij".
+            if question and subject == 'ti':
+                present = forms[1]
+            else:
+                present = 'wil' if code == 'laki' and subject == 'ela' else forms[1 + person]
+            past = forms[5] if person == 2 else forms[4]
+            if finite == present:
+                matches.append((code, ''))
+            if finite == past:
+                matches.append((code, 'na'))
+        matches = list(dict.fromkeys(matches))
+        if len(matches) != 1:
             raise UnsupportedSentenceError('Onbekend of dubbelzinnig werkwoord; gebruik een voorbeeldzin uit de gids.')
-        verb,tense=matching[0]
+        verb, tense = matches[0]
+
+    # Alleen twee canonieke soorten ontkenning: "niet" aan het einde van
+    # de zinskern of "geen" vóór een gewoon zelfstandig naamwoord.
+    if words.count('niet') > 1 or words.count('geen') > 1 or ('niet' in words and 'geen' in words):
+        raise UnsupportedSentenceError('Gebruik één ontkenning: niet of geen, niet allebei.')
     negated = False
-    if 'niet' in words:
-        words.remove('niet'); negated=True
-    if 'geen' in words:
-        words.remove('geen');negated=True
-    if words and words[0] in ('de','het','een'):
+    if words and words[-1] == 'niet':
+        words.pop()
+        negated = True
+    elif 'niet' in words:
+        raise UnsupportedSentenceError("'Niet' hoort in deze eenvoudige zinnen aan het einde van de zinsdelen.")
+    no_article = False
+    if words and words[0] == 'geen':
         words.pop(0)
-    obj=adjective=None
+        negated = True
+        no_article = True
+    elif 'geen' in words:
+        raise UnsupportedSentenceError("'Geen' hoort direct vóór het voorwerp.")
+
+    article = None
+    if words and words[0] in ('de','het','een'):
+        article = words.pop(0)
+    if no_article and article:
+        raise UnsupportedSentenceError("Gebruik geen lidwoord na 'geen'.")
+    obj = adjective = None
     if words:
-        if len(words)>2:
+        if len(words) > 2:
             raise UnsupportedSentenceError('Slechts één voorwerp met eventueel één bijvoeglijk naamwoord wordt ondersteund.')
-        raw=words.pop()
+        raw = words.pop()
         if raw in OBJECTS_NL:
-            obj=OBJECTS_NL[raw]
+            obj = OBJECTS_NL[raw]
         elif raw in NOUNS:
-            obj=NOUNS[raw]
-            if obj == 'Torelkiva': obj='torelkiva'
+            obj = NOUNS[raw]
+            if obj == 'Torelkiva':
+                obj = 'torelkiva'
         else:
             raise UnsupportedSentenceError(f'Geen Torelkiva-woord voor {raw!r}.')
         if words:
-            raw=words.pop()
-            if raw not in ADJS:
-                raise UnsupportedSentenceError(f'Geen Torelkiva-bijvoeglijk naamwoord voor {raw!r}.')
-            adjective=ADJS[raw]
+            attr = words.pop()
+            if attr not in ADJS:
+                raise UnsupportedSentenceError(f'Geen Torelkiva-bijvoeglijk naamwoord voor {attr!r}.')
+            adjective = ADJS[attr]
+        if (article or no_article) and (obj in OBJECTS_TK or obj == 'torelkiva'):
+            raise UnsupportedSentenceError('Gebruik geen lidwoord of geen bij een voornaamwoord of eigennaam.')
+        if adjective and (obj in OBJECTS_TK or obj == 'torelkiva'):
+            raise UnsupportedSentenceError('Gebruik geen bijvoeglijk naamwoord bij een voornaamwoord of eigennaam.')
+        if (article or no_article) and adjective:
+            # Foute verbuigingen worden niet stilzwijgend vertaald.
+            stem = NL_ADJ[adjective]
+            needs_e = article in ('de','het') or ((article=='een' or no_article) and obj not in {'viro','sima','lavi','meva','mora','liri','pora'})
+            expected = {'groot':'grote'}.get(stem, stem if stem.endswith('e') else stem+'e') if needs_e else stem
+            if attr != expected:
+                raise UnsupportedSentenceError(f'Onjuiste bijvoeglijke vorm: gebruik {expected!r}.')
+    elif article or no_article:
+        raise UnsupportedSentenceError('Na een lidwoord of geen moet een voorwerp staan.')
+
+    if negated and obj and obj not in OBJECTS_TK and obj != 'torelkiva':
+        if not no_article:
+            # In de gecontroleerde taal worden ontkende zelfstandige naamwoorden
+            # uitgedrukt met "geen", niet met "een/de/het ... niet".
+            raise UnsupportedSentenceError("Gebruik 'geen [voorwerp]' bij een ontkend zelfstandig naamwoord.")
+    if no_article and not obj:
+        raise UnsupportedSentenceError("'Geen' vereist een voorwerp.")
     return Parsed(subject,verb,obj,adjective,tense,negated,question)
 
 
