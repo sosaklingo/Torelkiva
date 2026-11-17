@@ -46,17 +46,17 @@ def vind(term: str, exact: bool = False) -> list[dict[str, str]]:
     if not needle:
         return []
     return [row for row in woorden() if (
-        row['torelkiva'].casefold() == needle if exact else
+        (row['torelkiva'].casefold() == needle or row['nederlands'].casefold() == needle) if exact else
         needle in row['torelkiva'].casefold() or needle in row['nederlands'].casefold()
     )]
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description='Torelkiva 2.2 — woordenboek en oefenhulp (geen automatische vertaler)')
-    parser.add_argument('--versie', action='version', version='Torelkiva taalhulp 1.2')
+    parser.add_argument('--versie', action='version', version='Torelkiva taalhulp 2.2')
     sub = parser.add_subparsers(dest='opdracht', required=True)
     for name in ('zoek', 'woord'):
-        p = sub.add_parser(name, help='Zoek een deel van een woord' if name == 'zoek' else 'Zoek een exact Torelkiva-woord')
+        p = sub.add_parser(name, help='Zoek een deel van een woord' if name == 'zoek' else 'Zoek een exact Nederlands of Torelkiva-woord')
         p.add_argument('term', help='Torelkiva of Nederlands zoekwoord')
     sub.add_parser('lijst', help='Laat alle woorden zien')
     sub.add_parser('voorbeelden', help='Laat voorbeeldzinnen zien')
