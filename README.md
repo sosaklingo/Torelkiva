@@ -1,5 +1,7 @@
 # TORELKIVA 2.2 — kunsttaal, schrift en versleuteling
 
+[Complete English user guide](README.en.md)
+
 > **Torelkiva — ontwikkeld op initiatief van Marco Beenen in samenwerking met ChatGPT (OpenAI), begonnen op 12 november 2026.**  
 > Versie **2.2** — openbare projecteditie; volledig lokaal bruikbaar op Windows en Linux.  
 > **Geen officiële OpenAI-goedkeuring, merkregistratie of onafhankelijke beveiligingsaudit.**
@@ -46,6 +48,7 @@ python vertaler.py --van tk "Mi tiem vo nela."
 
 ```bash
 python taal.py zoek geheim
+python taal.py woord hallo
 python taal.py oefen
 ```
 
